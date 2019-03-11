@@ -22,7 +22,8 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping("/park")
-	public String displayParkDetailPage(@RequestParam String id) {
+	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap) {
+		modelMap.addAttribute("id", id);
 		return "parkDetail";
 	}
 	
