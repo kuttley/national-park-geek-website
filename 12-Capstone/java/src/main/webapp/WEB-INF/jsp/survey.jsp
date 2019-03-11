@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp">
 	<c:param name="title">Daily Survey</c:param>
@@ -6,30 +7,30 @@
 </c:import>
 
 <h2>Take Survey</h2>
-<form id="postForm" action="favoriteParks" method="POST">
+<form:form id="postForm" action="favoriteParks" method="POST" modelAttribute="survey">
 	<div>
 		<label for="parkCode">Choose a Park</label>
-		<select name="parkCode">
+		<form:select path="parkCode">
 			<c:forEach var="park" items="${parksList}">
 				<option value="${park.parkCode}">${park.parkName}</option>
 			</c:forEach>
-		</select>
+		</form:select>
 	</div>
 	<div>
-		<label for="email">Email</label> <input type="email" name="email" />
+		<label for="email">Email</label> <form:input type="email" path="email" />
 	</div>
 	<div>
-		<label for="activitylevel">Choose an Activity Level</label>
-		<select name="activitylevel">
+		<label for="activityLevel">Choose an Activity Level</label>
+		<form:select path="activityLevel">
 			<option value="inactive">Inactive</option>
 			<option value="sedentary">Sedentary</option>
 			<option value="active">Active</option>
 			<option value="extremelyactive">Extremely Active</option>
-		</select>
+		</form:select>
 	</div>
 	<div>
 		<label for="state">What is your state of residence?</label>
-		<select name="state">
+		<form:select path="state">
 			<option value="">N/A</option>
 			<option value="AK">Alaska</option>
 			<option value="AL">Alabama</option>
@@ -83,9 +84,9 @@
 			<option value="WI">Wisconsin</option>
 			<option value="WV">West Virginia</option>
 			<option value="WY">Wyoming</option>
-		</select>
+		</form:select>
 	</div>
 	<button type="submit">Submit</button>
-</form>
+</form:form>
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
