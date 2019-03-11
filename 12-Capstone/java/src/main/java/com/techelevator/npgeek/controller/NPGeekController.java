@@ -1,5 +1,6 @@
 package com.techelevator.npgeek.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,11 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping("/park")
-	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap) {
+	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap, HttpServletRequest request) {
+		if (request.getSession().getAttribute("tempScale") == null) {
+			request.getSession().setAttribute("tempScale", "F");
+		}
+		System.out.println(request.getSession().getAttribute("tempScale"));
 		modelMap.addAttribute("park", parkDao.getInfoForPark(id));
 		modelMap.addAttribute("weather", weatherDao.getFiveDayForecast(id));
 		return "parkDetail";
