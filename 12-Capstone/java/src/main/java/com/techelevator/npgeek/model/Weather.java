@@ -4,12 +4,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 public class Weather {
 	@NotBlank
-	@Size(max=10)
+	@Size(min=1,max=10)
 	private String parkCode;
 	@NotNull
+	@Range(min=1,max=5)
 	private Integer forecastDay;
 	@NotNull
 	private Double lowTempF;
@@ -20,6 +22,7 @@ public class Weather {
 	@NotNull
 	private Double highTempC;
 	@NotBlank
+	@Size(min=1,max=100)
 	private String forecast;
 	
 	public String getParkCode() {
