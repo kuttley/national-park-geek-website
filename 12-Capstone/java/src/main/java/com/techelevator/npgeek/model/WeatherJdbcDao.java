@@ -36,8 +36,10 @@ public class WeatherJdbcDao implements WeatherDao{
 		oneDayForecast.setParkCode(parkcode);
 		oneDayForecast.setForecastDay(day);
 		while(results.next()) {
-			oneDayForecast.setLowTemp(results.getInt("low"));
-			oneDayForecast.setHighTemp(results.getInt("high"));
+			oneDayForecast.setLowTempF(results.getInt("low"));
+			oneDayForecast.setHighTempF(results.getInt("high"));
+			oneDayForecast.setLowTempC(oneDayForecast.getLowTempF());
+			oneDayForecast.setHighTempC(oneDayForecast.getHighTempF());
 			oneDayForecast.setForecast(results.getString("forecast"));
 		}
 		return oneDayForecast;

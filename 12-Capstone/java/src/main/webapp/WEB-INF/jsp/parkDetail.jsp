@@ -23,6 +23,16 @@
 	<div>${park.description}</div>
 	<div>${park.entryFee}</div>
 	<div>${park.numberOfAnimalSpecies}</div>
+	<div>
+		<c:forEach var="weatherForecast" items="${weather}">
+			<div>
+				<div>${weatherForecast.forecastDay}</div>
+				<div>${weatherForecast.lowTempF}</div>
+				<div>${weatherForecast.highTempF}</div>
+				<div>${weatherForecast.forecast}</div>
+			</div>
+		</c:forEach>
+	</div>
 </div>
 
 
