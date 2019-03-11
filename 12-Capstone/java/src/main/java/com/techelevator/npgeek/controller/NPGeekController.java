@@ -1,8 +1,12 @@
 package com.techelevator.npgeek.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +15,7 @@ import com.techelevator.npgeek.model.ParkDao;
 import com.techelevator.npgeek.model.Survey;
 import com.techelevator.npgeek.model.SurveyDao;
 import com.techelevator.npgeek.model.WeatherDao;
+import com.techelevator.ssg.model.forum.ForumPost;
 
 @Controller
 public class NPGeekController {
@@ -42,9 +47,12 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.POST)
-	public String handleSurveyPost(@RequestParam Survey survey) {
+	public String handleSurveyPost(@ModelAttribute Survey survey, BindingResult result) {
+		if (result.hasErrors() || survey.getParkCode().isEmpty() || survey.getState().isEmpty() || survey.getActivityLevel().isEmpty()) {
+			return "survey";
+		}
 		surveyDao.saveSurvey(survey);
-		return "redirect:/favoriteParks";
+		return "redirect:favoriteParks";
 	}
 	
 	@RequestMapping("/favoriteParks")
