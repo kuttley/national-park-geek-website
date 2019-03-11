@@ -64,7 +64,6 @@ public class NPGeekController {
 	
 	@RequestMapping("/favoriteParks")
 	public String displayFavoriteParksPage(ModelMap modelMap) {
-		modelMap.addAttribute("parksList", parkDao.getAllParks());
 		modelMap.addAttribute("surveys", surveyDao.getVoteCount());
 		return "favoriteParks";
 	}

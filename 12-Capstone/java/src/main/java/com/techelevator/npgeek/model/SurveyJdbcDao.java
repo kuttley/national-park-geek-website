@@ -23,8 +23,8 @@ public class SurveyJdbcDao implements SurveyDao{
 	}
 	
 	@Override
-	public Map<String,Integer> getVoteCount() {
-		Map<String,Integer> map = new HashMap<String,Integer>();
+	public Map<Park,Integer> getVoteCount() {
+		Map<Park,Integer> map = new HashMap<Park,Integer>();
 		String selectParkCodes = "SELECT parkcode FROM park";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectParkCodes);
 		List<String> parkCodesList = new ArrayList<String>();
@@ -32,7 +32,7 @@ public class SurveyJdbcDao implements SurveyDao{
 			parkCodesList.add(results.getString("parkcode"));
 		}
 		for (String parkcode: parkCodesList) {
-			map.put(parkcode,getVoteCountForPark(parkcode));
+			map.put(createPark(parkcode),getVoteCountForPark(parkcode));
 		}
 		return map;
 	}
@@ -52,6 +52,30 @@ public class SurveyJdbcDao implements SurveyDao{
 			return results.getInt("totalvotes");
 		}
 		return 0;
+	}
+	
+	private Park createPark(String parkcode) {
+		String selectPark = "SELECT * FROM park WHERE parkcode = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectPark, parkcode);
+		Park park = new Park();
+		park.setParkCode(parkcode);
+		if (results.next()) {
+			park.setParkName(results.getString("parkname"));
+			park.setState(results.getString("state"));
+			park.setAcreage(results.getInt("acreage"));
+			park.setElevationInFeet(results.getInt("elevationinfeet"));
+			park.setMilesOfTrail(results.getDouble("milesoftrail"));
+			park.setCampsites(results.getInt("numberofcampsites"));
+			park.setClimate(results.getString("climate"));
+			park.setYearFounded(results.getInt("yearfounded"));
+			park.setAnnualVisitorCount(results.getInt("annualvisitorcount"));
+			park.setInspirationalQuote(results.getString("inspirationalquote"));
+			park.setInspirationalQuoteSource(results.getString("inspirationalquotesource"));
+			park.setDescription(results.getString("parkdescription"));
+			park.setEntryFee(results.getInt("entryfee"));
+			park.setNumberOfAnimalSpecies(results.getInt("numberofanimalspecies"));
+		}
+		return park;
 	}
 
 }
