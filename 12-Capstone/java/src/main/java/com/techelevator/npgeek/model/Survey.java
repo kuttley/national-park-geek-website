@@ -17,7 +17,7 @@ public class Survey {
 	@Size(min=2,max=2)
 	private String state;
 	@NotBlank
-	@Size(max=100)
+	@Size(min=6,max=15)
 	private String activityLevel;
 	
 	public String getParkCode() {

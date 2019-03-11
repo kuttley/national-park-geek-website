@@ -1,6 +1,6 @@
 package com.techelevator.npgeek.model;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,8 @@ public class SurveyJdbcDao implements SurveyDao{
 	
 	@Override
 	public Map<Park,Integer> getVoteCount() {
-		Map<Park,Integer> map = new HashMap<Park,Integer>();
-		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes";
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes DESC";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark);
 		while (results.next()) {
 			String parkcode = results.getString("parkcode");

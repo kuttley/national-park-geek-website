@@ -24,6 +24,7 @@
 		<div>
 			<label for="activityLevel">Choose an Activity Level</label>
 			<form:select path="activityLevel">
+				<option value="">N/A</option>
 				<option value="inactive">Inactive</option>
 				<option value="sedentary">Sedentary</option>
 				<option value="active">Active</option>
