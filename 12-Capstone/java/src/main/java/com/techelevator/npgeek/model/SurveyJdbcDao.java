@@ -1,12 +1,8 @@
 package com.techelevator.npgeek.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -25,14 +21,11 @@ public class SurveyJdbcDao implements SurveyDao{
 	@Override
 	public Map<Park,Integer> getVoteCount() {
 		Map<Park,Integer> map = new HashMap<Park,Integer>();
-		String selectParkCodes = "SELECT parkcode FROM park";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(selectParkCodes);
-		List<String> parkCodesList = new ArrayList<String>();
-		while(results.next()) {
-			parkCodesList.add(results.getString("parkcode"));
-		}
-		for (String parkcode: parkCodesList) {
-			map.put(createPark(parkcode),getVoteCountForPark(parkcode));
+		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
 		}
 		return map;
 	}
@@ -43,15 +36,6 @@ public class SurveyJdbcDao implements SurveyDao{
 								   + "Values (?,?,?,?)";
 		jdbcTemplate.update(insertSurveyResults, survey.getParkCode(), survey.getEmail(),
 																	survey.getState(), survey.getActivityLevel());
-	}
-	
-	private int getVoteCountForPark(String parkcode) {
-		String selectSurveysForPark = "SELECT COUNT(*) AS totalvotes FROM survey_result WHERE parkcode = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, parkcode);
-		if (results.next()) {
-			return results.getInt("totalvotes");
-		}
-		return 0;
 	}
 	
 	private Park createPark(String parkcode) {

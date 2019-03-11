@@ -16,9 +16,14 @@
 				</div>
 				<div class="col-md-8">
 					<div class="card-body">
-						<h4 class="card-title">${survey.key.parkName} ${survey.value}</h4>
+						<h4 class="card-title">${survey.key.parkName}</h4>
 						<h5 class="card-text text-black-50">${survey.key.state}</h5>
-						<p class="card-text">${survey.key.description}</p>
+						<c:if test="${survey.value > 1}">
+							<p class="card-text">This is the favorite National Park of ${survey.value} people!</p>
+						</c:if>
+						<c:if test="${survey.value < 2}">
+							<p class="card-text">This is the favorite National Park of ${survey.value} person!</p>
+						</c:if>
 					</div>
 				</div>
 			</div>
