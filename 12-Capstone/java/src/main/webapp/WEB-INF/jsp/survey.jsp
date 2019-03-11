@@ -6,7 +6,7 @@
 </c:import>
 
 <h2>Take Survey</h2>
-<form id="postForm" action="makePost" method="POST">
+<form id="postForm" action="favoriteParks" method="POST">
 	<div>
 		<label for="parkCode">Choose a Park</label>
 		<select name="parkCode">
