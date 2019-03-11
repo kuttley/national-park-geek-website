@@ -12,6 +12,7 @@
 		<div>
 			<label for="parkCode">Choose a Park</label>
 			<form:select path="parkCode">
+				<option value=""></option>
 				<c:forEach var="park" items="${parksList}">
 					<option value="${park.parkCode}">${park.parkName}</option>
 				</c:forEach>
@@ -24,7 +25,7 @@
 		<div>
 			<label for="activityLevel">Choose an Activity Level</label>
 			<form:select path="activityLevel">
-				<option value="">N/A</option>
+				<option value=""></option>
 				<option value="inactive">Inactive</option>
 				<option value="sedentary">Sedentary</option>
 				<option value="active">Active</option>
@@ -34,7 +35,7 @@
 		<div>
 			<label for="state">What is your state of residence?</label>
 			<form:select path="state">
-				<option value="">N/A</option>
+				<option value=""></option>
 				<option value="AK">Alaska</option>
 				<option value="AL">Alabama</option>
 				<option value="AR">Arkansas</option>
