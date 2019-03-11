@@ -14,12 +14,14 @@
 <link rel="stylesheet" href="css/npgeek.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat|Overpass:300,400" rel="stylesheet">
 </head>
-<body class="bg-light">
-	<c:url var="logo" value="/img/logo.png" />
-	<c:url var="home" value="/" />
-	<a href="${home}"><img src="${logo}" alt="National Park Geek Logo" id="logo"></a>
+<body>
+	<div class="d-flex justify-content-center py-3" id="header">
+		<c:url var="logo" value="/img/logo.png" />
+		<c:url var="home" value="/" />
+		<a href="${home}"><img src="${logo}" alt="National Park Geek Logo" id="logo"></a>
+	</div>
 	
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark text-uppercase">
 		<a class="navbar-brand"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>
@@ -43,5 +45,5 @@
 		</div>
 	</nav>
 	
-	<div class="bg-light py-3" id="main-content">
+	<div class="py-3" id="main-content">
 		<div class="container">
