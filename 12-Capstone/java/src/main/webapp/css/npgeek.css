@@ -2,10 +2,6 @@ html, body {
 	height: 100vh;
 }
 
-h3 {
-	font-family: "Montserrat";
-}
-
 a {
 	text-decoration: none;
 	color: inherit;
@@ -23,7 +19,7 @@ img#logo {
 	max-height: auto;
 }
 
-#park-detail {
+#park-detail-page {
 	background-color: rgba(199, 218, 218, 0.7);
 }
 
@@ -36,6 +32,8 @@ img#logo {
 	max-width: 1000px;
 	background-color: rgba(199, 218, 218, 0.7);
 }
+
+
 .card-title {
 	font-family: "Montserrat";
 }
@@ -45,3 +43,13 @@ img#logo {
 	font-weight: 300;
 }
 
+.weather-card {
+	margin-right: .5rem;
+	width: 12rem;
+	border: 1px solid rgba(0,0,0,.125)!important;
+	
+}
+
+.weather-card:last-child {
+	margin-right: 0!important;
+}

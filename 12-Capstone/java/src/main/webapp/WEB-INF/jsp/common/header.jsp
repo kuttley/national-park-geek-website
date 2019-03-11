@@ -43,5 +43,5 @@
 		</div>
 	</nav>
 	
-	<div class="bg-dark py-3" id="main-content">
+	<div class="bg-light py-3" id="main-content">
 		<div class="container">

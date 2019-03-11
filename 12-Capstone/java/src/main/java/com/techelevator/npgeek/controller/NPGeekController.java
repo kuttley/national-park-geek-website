@@ -37,7 +37,6 @@ public class NPGeekController {
 		if (request.getSession().getAttribute("tempScale") == null) {
 			request.getSession().setAttribute("tempScale", "F");
 		}
-		System.out.println(request.getSession().getAttribute("tempScale"));
 		modelMap.addAttribute("park", parkDao.getInfoForPark(id));
 		modelMap.addAttribute("weather", weatherDao.getFiveDayForecast(id));
 		return "parkDetail";

@@ -6,7 +6,7 @@
 </c:import>
 	
 	<c:forEach var="park" items="${parksList}">
-		<div class="card mb-3">
+		<div class="card mb-3 shadow">
 			<div class="row no-gutters">
 				<c:url var="parkDetailPage" value="/park?id=${park.parkCode}" /> 
 				<div class="col-md-4 mt-auto mb-auto">

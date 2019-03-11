@@ -42,9 +42,22 @@ public class WeatherJdbcDao implements WeatherDao{
 			oneDayForecast.setHighTempF(results.getInt("high"));
 			oneDayForecast.setLowTempC(oneDayForecast.getLowTempF());
 			oneDayForecast.setHighTempC(oneDayForecast.getHighTempF());
-			oneDayForecast.setForecast(results.getString("forecast"));
+			oneDayForecast.setForecast(getCamelCaseForecast(results.getString("forecast").split(" ")));
 		}
 		return oneDayForecast;
+	}
+	
+	private String getCamelCaseForecast(String[] splitForecast) {
+		String camelCased = "";
+		camelCased += splitForecast[0];
+		for (int i = 1; i < splitForecast.length; i++) {
+			if (splitForecast[i] != null && !splitForecast[i].isEmpty()) {
+				camelCased += splitForecast[i].substring(0, 1).toUpperCase();
+				camelCased += splitForecast[i].substring(1).toLowerCase();
+			}
+		}
+		
+		return camelCased;
 	}
 
 }
