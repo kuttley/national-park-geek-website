@@ -4,11 +4,14 @@
 	<c:param name="title"></c:param>
 </c:import>
 
-<c:set var="park" value="${park}"/>
-
-<div class="row">
+<div class="container rounded" id="park-detail">
 	<c:url var="parkImg" value="img/parks/${park.parkCode.toLowerCase()}.jpg" />
-	<img src="${parkImg}" alt="${park.parkName} image">
+	<img class="img-fluid mx-auto pt-2 d-block rounded" src="${parkImg}" alt="${park.parkName} image">
+	
+	<h3 class="display-4 mt-3">${park.parkName}</h3>
+</div>
+
+<%-- <div class="row">
 	<div>${park.parkName}</div>
 	<div>${park.state}</div>
 	<div>${park.acreage}</div>
@@ -27,13 +30,19 @@
 		<c:forEach var="weatherForecast" items="${weather}">
 			<div>
 				<div>${weatherForecast.forecastDay}</div>
-				<div>${weatherForecast.lowTempF}</div>
-				<div>${weatherForecast.highTempF}</div>
+				<c:if test="${sessionScope.tempScale == 'F'}">
+					<div>${weatherForecast.lowTempF}</div>
+					<div>${weatherForecast.highTempF}</div>
+				</c:if>
+				<c:if test="${sessionScope.tempScale == 'C'}">
+					<div>${weatherForecast.lowTempC}</div>
+					<div>${weatherForecast.highTempC}</div>
+				</c:if>
 				<div>${weatherForecast.forecast}</div>
 			</div>
 		</c:forEach>
 	</div>
-</div>
+</div> --%>
 
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
