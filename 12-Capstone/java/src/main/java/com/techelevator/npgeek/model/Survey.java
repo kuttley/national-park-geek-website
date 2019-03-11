@@ -1,24 +1,39 @@
 package com.techelevator.npgeek.model;
 
+import java.util.regex.Pattern;
+
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Survey {
-	@NotBlank
+	@NotBlank(message="*")
 	@Size(max=10)
 	private String parkCode;
-	@NotBlank
+	@NotBlank(message="*")
 	@Email
 	@Size(max=100)
 	private String email;
-	@NotBlank
+	@NotBlank(message="*")
 	@Size(min=2,max=2)
 	private String state;
-	@NotBlank
+	@NotBlank(message="*")
 	@Size(min=6,max=15)
 	private String activityLevel;
+	
+	@AssertTrue(message="* Valid Email Required")
+	public boolean isEmailValid() {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+				+ "A-Z]{2,7}$";
+
+		Pattern pattern = Pattern.compile(emailRegex);
+		if (email == null) {
+			return false;
+		}
+		return pattern.matcher(email).matches();
+	}
 	
 	public String getParkCode() {
 		return parkCode;
