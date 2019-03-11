@@ -8,7 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ParkJdbcDao implements ParkDao{
 
 	private JdbcTemplate jdbcTemplate;
@@ -24,7 +26,7 @@ public class ParkJdbcDao implements ParkDao{
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectParkCodes);
 		List<String> parkCodesList = new ArrayList<String>();
 		while(results.next()) {
-			parkCodesList.add(results.getString("parkcode"));
+			parkCodesList.add(results.getString("parkcode").toLowerCase());
 		}
 		List<Park> parksList = new ArrayList<Park>();
 		for (String parkcode: parkCodesList) {
@@ -53,8 +55,8 @@ public class ParkJdbcDao implements ParkDao{
 			park.setClimate(results.getString("climate"));
 			park.setYearFounded(results.getInt("yearfounded"));
 			park.setAnnualVisitorCount(results.getInt("annualvisitorcount"));
-			park.setInspirationalQuote(results.getString("insporationalquote"));
-			park.setInspirationalQuoteSource(results.getString("insporationalquotesource"));
+			park.setInspirationalQuote(results.getString("inspirationalquote"));
+			park.setInspirationalQuoteSource(results.getString("inspirationalquotesource"));
 			park.setDescription(results.getString("parkdescription"));
 			park.setEntryFee(results.getInt("entryfee"));
 			park.setNumberOfAnimalSpecies(results.getInt("numberofanimalspecies"));
