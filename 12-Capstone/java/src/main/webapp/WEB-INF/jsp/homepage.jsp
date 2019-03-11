@@ -22,7 +22,7 @@
 	<c:forEach var="park" items="${parksList}">
 		<div class="card mb-2 mt-2">
 			<div class="row no-gutters">
-				<c:url var="parkDetailPage" value="/park?id=${park.parkCode.toLowerCase()}" /> 
+				<c:url var="parkDetailPage" value="/park?id=${park.parkCode}" /> 
 				<div class="col-md-4 mt-auto mb-auto">
 					<c:url var="parkImg" value="img/parks/${park.parkCode.toLowerCase()}.jpg" />
 					<a href="${parkDetailPage}"><img class="card-img park-image ml-2" src="${parkImg}" alt="${park.parkName} image"></a>
