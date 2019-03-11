@@ -2,7 +2,7 @@ package com.techelevator.npgeek.model;
 
 public class Park {
 	
-	private int parkCode;
+	private String parkCode;
 	private String parkName;
 	private String state;
 	private int acreage;
@@ -18,10 +18,10 @@ public class Park {
 	private int entryFee;
 	private int numberOfAnimalSpecies;
 	
-	public int getParkCode() {
+	public String getParkCode() {
 		return parkCode;
 	}
-	public void setParkCode(int parkCode) {
+	public void setParkCode(String parkCode) {
 		this.parkCode = parkCode;
 	}
 	public String getParkName() {
