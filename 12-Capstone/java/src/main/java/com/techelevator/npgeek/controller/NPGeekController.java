@@ -1,7 +1,5 @@
 package com.techelevator.npgeek.controller;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -47,7 +45,7 @@ public class NPGeekController {
 	
 	@RequestMapping(path="/survey", method=RequestMethod.POST)
 	public String handleSurveyPost(@ModelAttribute Survey survey, BindingResult result) {
-		if (result.hasErrors() || survey.getParkCode().isEmpty() || survey.getState().isEmpty() || survey.getActivityLevel().isEmpty()) {
+		if (result.hasErrors()) {
 			return "survey";
 		}
 		surveyDao.saveSurvey(survey);
