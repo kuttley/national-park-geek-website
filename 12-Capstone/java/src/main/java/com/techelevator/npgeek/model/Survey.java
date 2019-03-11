@@ -1,9 +1,23 @@
 package com.techelevator.npgeek.model;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Survey {
+	@NotBlank
+	@Size(max=10)
 	private String parkCode;
+	@NotBlank
+	@Email
+	@Size(max=100)
 	private String email;
+	@NotBlank
+	@Size(min=2,max=2)
 	private String state;
+	@NotBlank
+	@Size(max=100)
 	private String activityLevel;
 	
 	public String getParkCode() {

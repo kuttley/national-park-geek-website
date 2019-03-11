@@ -55,7 +55,7 @@ public class NPGeekController {
 		if(result.hasErrors()) {
             flash.addFlashAttribute("survey", survey);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "survey", result);
-			return "survey";
+			return "redirect:survey";
         }
 		surveyDao.saveSurvey(survey);
 		return "redirect:favoriteParks";

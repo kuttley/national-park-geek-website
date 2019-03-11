@@ -1,22 +1,42 @@
 package com.techelevator.npgeek.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Park {
-	
+	@NotBlank
+	@Size(max=10)
 	private String parkCode;
+	@NotBlank
 	private String parkName;
+	@NotBlank
 	private String state;
-	private int acreage;
-	private int elevationInFeet;
-	private double milesOfTrail;
-	private int campsites;
+	@NotNull
+	private Integer acreage;
+	@NotNull
+	private Integer elevationInFeet;
+	@NotNull
+	private Double milesOfTrail;
+	@NotNull
+	private Integer campsites;
+	@NotBlank
 	private String climate;
-	private int yearFounded;
-	private int annualVisitorCount;
+	@NotNull
+	private Integer yearFounded;
+	@NotNull
+	private Integer annualVisitorCount;
+	@NotBlank
 	private String inspirationalQuote;
+	@NotBlank
 	private String inspirationalQuoteSource;
+	@NotBlank
 	private String description;
-	private int entryFee;
-	private int numberOfAnimalSpecies;
+	@NotNull
+	private Integer entryFee;
+	@NotNull
+	private Integer numberOfAnimalSpecies;
 	
 	public String getParkCode() {
 		return parkCode;

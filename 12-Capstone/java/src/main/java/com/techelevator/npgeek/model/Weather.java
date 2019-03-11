@@ -1,13 +1,25 @@
 package com.techelevator.npgeek.model;
 
-public class Weather {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+public class Weather {
+	@NotBlank
+	@Size(max=10)
 	private String parkCode;
-	private int forecastDay;
-	private double lowTempF;
-	private double lowTempC;
-	private double highTempF;
-	private double highTempC;
+	@NotNull
+	private Integer forecastDay;
+	@NotNull
+	private Double lowTempF;
+	@NotNull
+	private Double lowTempC;
+	@NotNull
+	private Double highTempF;
+	@NotNull
+	private Double highTempC;
+	@NotBlank
 	private String forecast;
 	
 	public String getParkCode() {
