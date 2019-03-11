@@ -35,7 +35,8 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.GET)
-	public String displaySurveyPage() {
+	public String displaySurveyPage(ModelMap modelMap) {
+		modelMap.addAttribute("parksList", parkDao.getAllParks());
 		return "survey";
 	}
 	
