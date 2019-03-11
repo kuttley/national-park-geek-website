@@ -5,8 +5,6 @@
 	<c:param name="favsActive">active</c:param>
 </c:import>
 
-<c:set var="surveys" value="${surveys}" />
-
 <c:forEach var="park" items="${parksList}">
 	<c:if test="${surveys.parkCode > 0}">
 		<div class="card mb-2 mt-2">

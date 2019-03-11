@@ -7,7 +7,7 @@
 </c:import>
 
 <h2>Take Survey</h2>
-<form:form id="postForm" action="favoriteParks" method="POST" modelAttribute="survey">
+<form:form id="postForm" action="survey" method="POST" modelAttribute="survey">
 	<div>
 		<label for="parkCode">Choose a Park</label>
 		<form:select path="parkCode">
