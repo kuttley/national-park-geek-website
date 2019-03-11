@@ -1,5 +1,6 @@
 package com.techelevator.npgeek.model;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -7,35 +8,48 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class Park {
 	@NotBlank
-	@Size(max=10)
+	@Size(min=1,max=10)
 	private String parkCode;
 	@NotBlank
+	@Size(min=1,max=200)
 	private String parkName;
 	@NotBlank
+	@Size(min=1,max=30)
 	private String state;
 	@NotNull
+	@Min(value=0)
 	private Integer acreage;
 	@NotNull
 	private Integer elevationInFeet;
 	@NotNull
+	@Min(value=0)
 	private Double milesOfTrail;
 	@NotNull
+	@Min(value=0)
 	private Integer campsites;
 	@NotBlank
+	@Size(min=1,max=100)
 	private String climate;
 	@NotNull
+	@Min(value=0)
 	private Integer yearFounded;
 	@NotNull
+	@Min(value=0)
 	private Integer annualVisitorCount;
 	@NotBlank
+	@Size(min=1)
 	private String inspirationalQuote;
 	@NotBlank
+	@Size(min=1,max=200)
 	private String inspirationalQuoteSource;
 	@NotBlank
+	@Size(min=1)
 	private String description;
 	@NotNull
+	@Min(value=0)
 	private Integer entryFee;
 	@NotNull
+	@Min(value=0)
 	private Integer numberOfAnimalSpecies;
 	
 	public String getParkCode() {
