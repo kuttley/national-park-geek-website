@@ -4,23 +4,9 @@
 	<c:param name="title">Home</c:param>
 	<c:param name="homeActive">active</c:param>
 </c:import>
-
-<%-- 	<ul class="list-unstyled">
-		<c:forEach var="park" items="${parksList}">
-			<li class="media my-4">
-				<c:url var="parkImg" value="img/parks/${park.parkCode.toLowerCase()}.jpg" />
-				<img class="align-self-start mr-3 park-image" src="${parkImg}" alt="${park.parkName} image">
-				<div class="media-body">
-					<h4 class="mt-0 mb-1">${park.parkName}</h4>
-					<h5>${park.state}</h5>
-					<p>${park.description}</p>
-				</div>
-			</li>
-		</c:forEach>
-	</ul> --%>
 	
 	<c:forEach var="park" items="${parksList}">
-		<div class="card mb-2 mt-2">
+		<div class="card mb-3">
 			<div class="row no-gutters">
 				<c:url var="parkDetailPage" value="/park?id=${park.parkCode}" /> 
 				<div class="col-md-4 mt-auto mb-auto">
