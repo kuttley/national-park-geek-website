@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.npgeek.model.ParkDao;
+import com.techelevator.npgeek.model.Survey;
 import com.techelevator.npgeek.model.SurveyDao;
 import com.techelevator.npgeek.model.WeatherDao;
 
@@ -41,12 +42,14 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.POST)
-	public String handleSurveyPost() {
+	public String handleSurveyPost(@RequestParam Survey survey) {
+		surveyDao.saveSurvey(survey);
 		return "redirect:/favoriteParks";
 	}
 	
 	@RequestMapping("/favoriteParks")
 	public String displayFavoriteParksPage(ModelMap modelMap) {
+		modelMap.addAttribute("parksList", parkDao.getAllParks());
 		modelMap.addAttribute("surveys", surveyDao.getVoteCount());
 		return "favoriteParks";
 	}
