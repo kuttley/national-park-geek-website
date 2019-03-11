@@ -4,8 +4,12 @@
 	<c:param name="title"></c:param>
 </c:import>
 
-<div>
-	
+<c:set var="park" value="${park}"/>
+
+<div class="row">
+	<c:url var="parkImg" value="img/parks/${park.parkCode}.jpg" />
+	<img src="${parkImg}" alt="${park.parkName} image">
+	<div>${park.parkName}</div>
 </div>
 
 

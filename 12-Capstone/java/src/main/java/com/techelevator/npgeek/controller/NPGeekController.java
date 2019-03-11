@@ -23,7 +23,7 @@ public class NPGeekController {
 	
 	@RequestMapping("/park")
 	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap) {
-		modelMap.addAttribute("id", id);
+		modelMap.addAttribute("park", parkDao.getInfoForPark(id));
 		return "parkDetail";
 	}
 	
