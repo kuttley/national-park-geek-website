@@ -12,13 +12,14 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/npgeek.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Overpass:300,400" rel="stylesheet">
 </head>
-<body>
+<body class="bg-light">
 	<c:url var="logo" value="/img/logo.png" />
 	<c:url var="home" value="/" />
 	<a href="${home}"><img src="${logo}" alt="National Park Geek Logo" id="logo"></a>
 	
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		  <span class="navbar-toggler-icon"></span>

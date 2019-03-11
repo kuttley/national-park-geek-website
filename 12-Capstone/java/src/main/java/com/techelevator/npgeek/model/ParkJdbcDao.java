@@ -26,7 +26,7 @@ public class ParkJdbcDao implements ParkDao{
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectParkCodes);
 		List<String> parkCodesList = new ArrayList<String>();
 		while(results.next()) {
-			parkCodesList.add(results.getString("parkcode").toLowerCase());
+			parkCodesList.add(results.getString("parkcode"));
 		}
 		List<Park> parksList = new ArrayList<Park>();
 		for (String parkcode: parkCodesList) {
@@ -45,7 +45,7 @@ public class ParkJdbcDao implements ParkDao{
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectPark, parkcode);
 		Park park = new Park();
 		park.setParkCode(parkcode);
-		while(results.next()) {
+		if (results.next()) {
 			park.setParkName(results.getString("parkname"));
 			park.setState(results.getString("state"));
 			park.setAcreage(results.getInt("acreage"));
