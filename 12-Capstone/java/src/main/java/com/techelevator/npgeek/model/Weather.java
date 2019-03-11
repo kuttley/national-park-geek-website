@@ -2,16 +2,16 @@ package com.techelevator.npgeek.model;
 
 public class Weather {
 
-	private int parkCode;
+	private String parkCode;
 	private int forecastDay;
 	private int lowTemp;
 	private int highTemp;
 	private String forecast;
 	
-	public int getParkCode() {
+	public String getParkCode() {
 		return parkCode;
 	}
-	public void setParkCode(int parkCode) {
+	public void setParkCode(String parkCode) {
 		this.parkCode = parkCode;
 	}
 	public int getForecastDay() {

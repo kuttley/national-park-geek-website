@@ -1,17 +1,46 @@
 package com.techelevator.npgeek.model;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class WeatherJdbcDao implements WeatherDao{
 
-	@Override
-	public List<Weather> getFiveDayForecast(int parkCode) {
-		// TODO Auto-generated method stub
-		return null;
+	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	public WeatherJdbcDao(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	private Weather getWeatherForecastForOneDay(int parkCode, int day) {
-		return null;
+	@Override
+	public List<Weather> getFiveDayForecast(String parkcode) {
+		List<Weather> fiveDayForecast = new ArrayList<Weather>();
+		fiveDayForecast.add(getWeatherForecastForOneDay(parkcode, 1));
+		fiveDayForecast.add(getWeatherForecastForOneDay(parkcode, 2));
+		fiveDayForecast.add(getWeatherForecastForOneDay(parkcode, 3));
+		fiveDayForecast.add(getWeatherForecastForOneDay(parkcode, 4));
+		fiveDayForecast.add(getWeatherForecastForOneDay(parkcode, 5));
+		return fiveDayForecast;
+	}
+	
+	private Weather getWeatherForecastForOneDay(String parkcode, int day) {
+		Weather oneDayForecast = new Weather();
+		String selectWeatherForOneDay = "SELECT * FROM weather WHERE parkcode = ? AND fivedayforecastvalue = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectWeatherForOneDay, parkcode, day);
+		oneDayForecast.setParkCode(parkcode);
+		oneDayForecast.setForecastDay(day);
+		while(results.next()) {
+			oneDayForecast.setLowTemp(results.getInt("low"));
+			oneDayForecast.setHighTemp(results.getInt("high"));
+			oneDayForecast.setForecast(results.getString("forecast"));
+		}
+		return oneDayForecast;
 	}
 
 }
