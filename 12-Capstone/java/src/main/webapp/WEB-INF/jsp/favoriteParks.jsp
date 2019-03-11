@@ -9,20 +9,14 @@
 	<c:if test="${survey.value > 0}">
 		<div class="card mb-2 mt-2">
 			<div class="row no-gutters">
-				<c:url var="parkDetailPage"
-					value="/park?id=${survey.key.parkCode.toLowerCase()}" />
 				<div class="col-md-4 mt-auto mb-auto">
 					<c:url var="parkImg"
 						value="img/parks/${survey.key.parkCode.toLowerCase()}.jpg" />
-					<a href="${parkDetailPage}"><img
-						class="card-img park-image ml-2" src="${parkImg}"
-						alt="${survey.key.parkName} image"></a>
+					<img class="card-img park-image ml-2" src="${parkImg}" alt="${survey.key.parkName} image">
 				</div>
 				<div class="col-md-8">
 					<div class="card-body">
-						<h4 class="card-title">
-							<a href="${parkDetailPage}">${survey.key.parkName} ${survey.value}</a>
-						</h4>
+						<h4 class="card-title">${survey.key.parkName} ${survey.value}</h4>
 						<h5 class="card-text text-black-50">${survey.key.state}</h5>
 						<p class="card-text">${survey.key.description}</p>
 					</div>
