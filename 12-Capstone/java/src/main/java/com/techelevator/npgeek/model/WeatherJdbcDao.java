@@ -8,7 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WeatherJdbcDao implements WeatherDao{
 
 	private JdbcTemplate jdbcTemplate;
@@ -36,8 +38,10 @@ public class WeatherJdbcDao implements WeatherDao{
 		oneDayForecast.setParkCode(parkcode);
 		oneDayForecast.setForecastDay(day);
 		while(results.next()) {
-			oneDayForecast.setLowTemp(results.getInt("low"));
-			oneDayForecast.setHighTemp(results.getInt("high"));
+			oneDayForecast.setLowTempF(results.getInt("low"));
+			oneDayForecast.setHighTempF(results.getInt("high"));
+			oneDayForecast.setLowTempC(oneDayForecast.getLowTempF());
+			oneDayForecast.setHighTempC(oneDayForecast.getHighTempF());
 			oneDayForecast.setForecast(results.getString("forecast"));
 		}
 		return oneDayForecast;
