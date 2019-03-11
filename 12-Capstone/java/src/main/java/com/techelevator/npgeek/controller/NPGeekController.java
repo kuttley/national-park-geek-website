@@ -15,7 +15,6 @@ import com.techelevator.npgeek.model.ParkDao;
 import com.techelevator.npgeek.model.Survey;
 import com.techelevator.npgeek.model.SurveyDao;
 import com.techelevator.npgeek.model.WeatherDao;
-import com.techelevator.ssg.model.forum.ForumPost;
 
 @Controller
 public class NPGeekController {
