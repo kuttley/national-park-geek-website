@@ -18,8 +18,7 @@
 		<label for="email">Email</label> <input type="email" name="email" />
 	</div>
 	<div>
-		<label for="activitylevel">Choose an Activity Level</label> <select
-			name="activitylevel">
+		<label for="activitylevel">Choose an Activity Level</label> <select name="activitylevel">
 			<option value="inactive">Inactive</option>
 			<option value="sedentary">Sedentary</option>
 			<option value="active">Active</option>
