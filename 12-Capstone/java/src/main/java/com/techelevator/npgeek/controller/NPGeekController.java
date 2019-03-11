@@ -52,13 +52,14 @@ public class NPGeekController {
 	@RequestMapping(path="/survey", method=RequestMethod.POST)
 	public String handleSurveyPost(@Valid @ModelAttribute Survey survey, BindingResult result,
 									RedirectAttributes flash) {
+
+        flash.addFlashAttribute("survey", survey);
 		if(result.hasErrors()) {
-            flash.addFlashAttribute("survey", survey);
             flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "survey", result);
-			return "survey";
+			return "redirect:/survey";
         }
 		surveyDao.saveSurvey(survey);
-		return "redirect:favoriteParks";
+		return "redirect:/favoriteParks";
 	}
 	
 	@RequestMapping("/favoriteParks")
