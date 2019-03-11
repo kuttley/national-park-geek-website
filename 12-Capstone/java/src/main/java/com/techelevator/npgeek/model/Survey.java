@@ -23,7 +23,7 @@ public class Survey {
 	@Size(min=6,max=15)
 	private String activityLevel;
 	
-	@AssertTrue(message="* Valid Email Required")
+	@AssertTrue
 	public boolean isEmailValid() {
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
 				+ "A-Z]{2,7}$";
