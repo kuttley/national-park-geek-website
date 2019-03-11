@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.npgeek.model.ParkDao;
+import com.techelevator.npgeek.model.SurveyDao;
+import com.techelevator.npgeek.model.WeatherDao;
 
 @Controller
 public class NPGeekController {
 	
 	@Autowired
 	private ParkDao parkDao;
+	@Autowired
+	private WeatherDao weatherDao;
+	@Autowired
+	private SurveyDao surveyDao;
 	
 	@RequestMapping("/") 
 	public String displayHomePage(ModelMap modelMap) {
@@ -24,6 +30,7 @@ public class NPGeekController {
 	@RequestMapping("/park")
 	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap) {
 		modelMap.addAttribute("park", parkDao.getInfoForPark(id));
+		modelMap.addAttribute("weather", weatherDao.getFiveDayForecast(id));
 		return "parkDetail";
 	}
 	
@@ -38,7 +45,8 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping("/favoriteParks")
-	public String displayFavoriteParksPage() {
+	public String displayFavoriteParksPage(ModelMap modelMap) {
+		modelMap.addAttribute("surveys", surveyDao.getVoteCount());
 		return "favoriteParks";
 	}
 	
