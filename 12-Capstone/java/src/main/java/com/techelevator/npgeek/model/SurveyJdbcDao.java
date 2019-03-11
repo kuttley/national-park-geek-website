@@ -39,7 +39,7 @@ public class SurveyJdbcDao implements SurveyDao{
 
 	@Override
 	public void saveSurvey(Survey survey) {
-		String insertSurveyResults = "INSERT INTO survey_result (parkcode, emailaddress, state, activitylevel)"
+		String insertSurveyResults = "INSERT INTO survey_result (parkcode, emailaddress, state, activitylevel) "
 								   + "Values (?,?,?,?)";
 		jdbcTemplate.update(insertSurveyResults, survey.getParkCode(), survey.getEmail(),
 																	survey.getState(), survey.getActivityLevel());
