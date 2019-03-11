@@ -11,7 +11,7 @@
 		<label for="parkCode">Choose a Park</label>
 		<select name="parkCode">
 			<c:forEach var="park" items="${parksList}">
-				<option value="${park.parkCode}">${park.name}</option>
+				<option value="${park.parkCode}">${park.parkName}</option>
 			</c:forEach>
 		</select>
 	</div>
