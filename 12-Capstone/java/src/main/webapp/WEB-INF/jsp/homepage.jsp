@@ -6,6 +6,7 @@
 </c:import>
 	
 	<c:forEach var="park" items="${parksList}">
+	<div class="d-flex justify-content-center">
 		<div class="card mb-3 shadow">
 			<div class="row no-gutters">
 				<c:url var="parkDetailPage" value="/park?id=${park.parkCode}" /> 
@@ -21,6 +22,7 @@
 					</div>
 			</div>
 			</div>
+		</div>
 		</div>
 	</c:forEach>
 
