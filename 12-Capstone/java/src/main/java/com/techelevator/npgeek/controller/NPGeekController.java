@@ -38,17 +38,25 @@ public class NPGeekController {
 		return "homepage";
 	}
 	
-	@RequestMapping("/park")
-	public String displayParkDetailPage(@RequestParam String id, @RequestParam(required=false) String tempScaleChange, ModelMap modelMap, HttpSession session) {
-		if (tempScaleChange != null) {
-			session.setAttribute("tempScale", tempScaleChange.substring(tempScaleChange.length() - 1));
-		}
+	@RequestMapping(path="/park", method=RequestMethod.GET)
+	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap, HttpSession session) {
 		if (session.getAttribute("tempScale") == null) {
 			session.setAttribute("tempScale", "F");
 		}
 		modelMap.addAttribute("park", parkDao.getInfoForPark(id));
 		modelMap.addAttribute("weather", weatherDao.getFiveDayForecast(id));
 		return "parkDetail";
+	}
+	
+	@RequestMapping(path="/park", method=RequestMethod.POST)
+	public String handleParkDetailPage(@RequestParam String id, @RequestParam(required=false) String tempScaleChange, ModelMap modelMap, HttpSession session) {
+		if (tempScaleChange != null) {
+			session.setAttribute("tempScale", tempScaleChange.substring(tempScaleChange.length() - 1));
+		}
+		if (session.getAttribute("tempScale") == null) {
+			session.setAttribute("tempScale", "F");
+		}
+		return "redirect:/park?id="+id;
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.GET)

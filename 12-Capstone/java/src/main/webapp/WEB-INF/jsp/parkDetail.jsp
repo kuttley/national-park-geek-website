@@ -76,10 +76,10 @@
 						<h5 class="card-title">${day}</h5>
 						
 						<c:if test="${sessionScope.tempScale == 'F'}">
-							<h5 class="card-text">${weatherForecast.highTempF} °F / <span class="h6">${weatherForecast.lowTempF} °F</span></h5>
+							<h5 class="card-text"><fmt:formatNumber value="${weatherForecast.highTempF}" maxFractionDigits="2" /> °F / <span class="h6"><fmt:formatNumber value="${weatherForecast.lowTempF}" maxFractionDigits="2" /> °F</span></h5>
 						</c:if>
 						<c:if test="${sessionScope.tempScale == 'C'}">
-							<h5 class="card-text">${weatherForecast.highTempC} °C / <span class="h6">${weatherForecast.lowTempC} °C</span></h5>
+							<h5 class="card-text"><fmt:formatNumber value="${weatherForecast.highTempC}" maxFractionDigits="2" /> °C / <span class="h6"><fmt:formatNumber value="${weatherForecast.lowTempC}" maxFractionDigits="2" /> °C</span></h5>
 						</c:if>
 						
 						
