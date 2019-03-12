@@ -5,7 +5,7 @@
 	<c:param name="title"></c:param>
 </c:import>
 
-<div class="container shadow-sm rounded px-5 pt-3" id="park-detail-page">
+<div class="container shadow-sm rounded px-5 py-3" id="park-container">
 	<c:url var="parkImg" value="img/parks/${park.parkCode.toLowerCase()}.jpg" />
 	<img class="img-fluid mx-auto d-block shadow-lg p-1 mb-2 rounded bg-white" src="${parkImg}" alt="${park.parkName} image">
 	
@@ -25,7 +25,7 @@
 				<div class="col-5">
 					<p class="text-dark">${park.description}</p>
 				</div>
-			<!-- TODO: Fix park information to look good. -->
+				
 				<div class="col-3 align-self-center">
 					<p class="text-muted"><strong class="text-dark">Entry Fee:</strong> <fmt:formatNumber value="${park.entryFee}" type="currency" /></p>
 					<p class="text-muted"><strong class="text-dark">Acreage:</strong> <fmt:formatNumber value="${park.acreage}" /></p>
@@ -41,14 +41,16 @@
 				 </div>
 			 </div>
 			 <hr>
+			 <div class="d-flex justify-content-end">
 			<form method="POST">
 				<c:if test="${sessionScope.tempScale == 'F'}">
-					<input name="tempScaleChange" type="submit" value="Change Temps to °C">
+					<button class="btn btn-outline-primary mb-3" name="tempScaleChange" type="submit" value="C">Change Temps to °C</button>
 				</c:if>
 				<c:if test="${sessionScope.tempScale == 'C'}">
-					<input name="tempScaleChange" type="submit" value="Change Temps to °F">
+					<button class="btn btn-outline-primary mb-3" name="tempScaleChange" type="submit" value="F">Change Temps to °F</button>
 				</c:if>
 			</form>
+			</div>
 			 
 			 <div class="card-group justify-content-center pb-3">
 			 <c:forEach var="weatherForecast" items="${weather}">
