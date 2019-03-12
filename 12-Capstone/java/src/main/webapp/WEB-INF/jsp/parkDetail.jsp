@@ -4,9 +4,9 @@
 	<c:param name="title"></c:param>
 </c:import>
 
-<div class="container shadow-sm rounded px-5" id="park-detail-page">
+<div class="container shadow-sm rounded px-5 pt-3" id="park-detail-page">
 	<c:url var="parkImg" value="img/parks/${park.parkCode.toLowerCase()}.jpg" />
-	<img class="img-fluid mx-auto pt-2 d-block rounded" src="${parkImg}" alt="${park.parkName} image">
+	<img class="img-fluid mx-auto d-block shadow-lg p-1 mb-2 rounded bg-white" src="${parkImg}" alt="${park.parkName} image">
 	
 	<div id="park-info">
 		<div class="mt-3 d-flex align-items-end flex-column" style="font-family: Montserrat">

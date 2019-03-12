@@ -79,9 +79,9 @@ public class NPGeekController {
 	private void populateParksList(HttpSession session) {
 		if (parksList == null || parksList.isEmpty()) {
 			parksList = parkDao.getAllParks();
-			if (session.getAttribute("parksList") == null) {
-				session.setAttribute("parksList", parksList);
-			}
+		}
+		if (session.getAttribute("parksList") == null) {
+			session.setAttribute("parksList", parksList);
 		}
 	}
 }
