@@ -85,7 +85,12 @@ public class Weather {
 			day = "Tomorrow";
 		}
 		else {
-			day = DayOfWeek.of(dayOfWeek.getValue() - (forecastDay - 2)).toString();
+			int thisDay = dayOfWeek.getValue() + (forecastDay - 1);
+			if (thisDay > 7) {
+				thisDay -= 7;
+			}
+			day = DayOfWeek.of(thisDay).toString();
+			day = day.substring(0,1) + day.substring(1).toLowerCase();
 		}
 	}
 }
