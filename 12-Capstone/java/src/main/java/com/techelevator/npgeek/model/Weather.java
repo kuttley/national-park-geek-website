@@ -1,5 +1,8 @@
 package com.techelevator.npgeek.model;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -24,6 +27,9 @@ public class Weather {
 	@NotBlank
 	@Size(min=1,max=100)
 	private String forecast;
+	@NotBlank
+	@Size(min=1,max=20)
+	private String day;
 	
 	public String getParkCode() {
 		return parkCode;
@@ -66,5 +72,21 @@ public class Weather {
 	}
 	public void setForecast(String forecast) {
 		this.forecast = forecast;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay() {
+		LocalDate today = LocalDate.now();
+		DayOfWeek dayOfWeek = today.getDayOfWeek();
+		if (forecastDay == 1) {
+			day = "Today";
+		}
+		else if (forecastDay == 2) {
+			day = "Tomorrow";
+		}
+		else {
+			day = DayOfWeek.of(dayOfWeek.getValue() - (forecastDay - 2)).toString();
+		}
 	}
 }
