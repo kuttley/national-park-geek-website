@@ -60,9 +60,9 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.GET)
-	public String displaySurveyPage(ModelMap modelHolder, ModelMap modelMap) {
-		if( ! modelHolder.containsAttribute("survey")){
-            modelHolder.put("survey", new Survey());
+	public String displaySurveyPage(ModelMap modelMap) {
+		if( ! modelMap.containsAttribute("survey")){
+			modelMap.put("survey", new Survey());
 		}
 		populateParksList(modelMap);
 		return "survey";
@@ -81,32 +81,22 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/favoriteParks", method=RequestMethod.GET)
-	public String displayFavoriteParksPage(ModelMap modelHolder, ModelMap modelMap) {
-		if (modelHolder.get("state") == null) {
-			modelHolder.put("state", "");
+	public String displayFavoriteParksPage(ModelMap modelMap) {
+		if (modelMap.get("state") == null) {
+			modelMap.put("state", "");
 		}
-		if (modelHolder.get("activityNum") == null || String.valueOf(modelHolder.get("activityNum")).isEmpty()) {
-			modelHolder.put("activityNum", "-1");
+		if (modelMap.get("activityNum") == null || String.valueOf(modelMap.get("activityNum")).isEmpty()) {
+			modelMap.put("activityNum", "-1");
 		}
-		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelHolder.get("state")), Integer.parseInt(String.valueOf(modelHolder.get("activityNum")))));
+		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelMap.get("state")), Integer.parseInt(String.valueOf(modelMap.get("activityNum")))));
 		return "favoriteParks";
 	}
 	
 	@RequestMapping(path="/favoriteParks", method=RequestMethod.POST)
 	public String handleFavoriteParksPage(@RequestParam String stateChosen, @RequestParam String activityNumChosen,
 										RedirectAttributes flash) {
-		if (stateChosen == null) {
-			flash.addFlashAttribute("state", "");
-		}
-		else {
-			flash.addFlashAttribute("state", stateChosen);
-		}
-		if (activityNumChosen == null || activityNumChosen.isEmpty()) {
-			flash.addFlashAttribute("activityNum", "-1");
-		}
-		else {
-			flash.addFlashAttribute("activityNum", activityNumChosen);
-		}
+		flash.addFlashAttribute("state", stateChosen);
+		flash.addFlashAttribute("activityNum", activityNumChosen);
 		return "redirect:/favoriteParks";
 	}
 	
