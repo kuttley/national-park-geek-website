@@ -53,7 +53,8 @@ img#logo {
 
 .weather-card {
 	margin-right: .5rem;
-	width: 12rem;
+	min-width: 9rem;
+	max-width: 12rem;
 	border: 1px solid rgba(0, 0, 0, .125) !important;
 }
 
