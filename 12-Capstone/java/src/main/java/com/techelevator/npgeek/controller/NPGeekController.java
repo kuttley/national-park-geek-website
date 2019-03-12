@@ -1,6 +1,9 @@
 package com.techelevator.npgeek.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.techelevator.npgeek.model.Park;
 import com.techelevator.npgeek.model.ParkDao;
 import com.techelevator.npgeek.model.Survey;
 import com.techelevator.npgeek.model.SurveyDao;
@@ -26,16 +31,18 @@ public class NPGeekController {
 	@Autowired
 	private SurveyDao surveyDao;
 	
+	private List<Park> parksList;
+	
 	@RequestMapping("/") 
-	public String displayHomePage(ModelMap modelMap) {
-		modelMap.addAttribute("parksList", parkDao.getAllParks());
+	public String displayHomePage(HttpSession session) {
+		populateParksList(session);
 		return "homepage";
 	}
 	
 	@RequestMapping("/park")
-	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap, HttpServletRequest request) {
-		if (request.getSession().getAttribute("tempScale") == null) {
-			request.getSession().setAttribute("tempScale", "F");
+	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap, HttpSession session) {
+		if (session.getAttribute("tempScale") == null) {
+			session.setAttribute("tempScale", "F");
 		}
 		modelMap.addAttribute("park", parkDao.getInfoForPark(id));
 		modelMap.addAttribute("weather", weatherDao.getFiveDayForecast(id));
@@ -43,11 +50,11 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.GET)
-	public String displaySurveyPage(ModelMap modelHolder, ModelMap modelMap) {
+	public String displaySurveyPage(ModelMap modelHolder, ModelMap modelMap, HttpSession session) {
 		if( ! modelHolder.containsAttribute("survey")){
             modelHolder.put("survey", new Survey());
-        }
-		modelMap.addAttribute("parksList", parkDao.getAllParks());
+		}
+		populateParksList(session);
 		return "survey";
 	}
 	
@@ -69,4 +76,12 @@ public class NPGeekController {
 		return "favoriteParks";
 	}
 	
+	private void populateParksList(HttpSession session) {
+		if (parksList == null || parksList.isEmpty()) {
+			parksList = parkDao.getAllParks();
+			if (session.getAttribute("parksList") == null) {
+				session.setAttribute("parksList", parksList);
+			}
+		}
+	}
 }
