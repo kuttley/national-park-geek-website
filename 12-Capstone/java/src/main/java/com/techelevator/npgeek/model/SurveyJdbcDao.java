@@ -29,6 +29,68 @@ public class SurveyJdbcDao implements SurveyDao{
 		}
 		return map;
 	}
+	
+	@Override
+	public Map<Park,Integer> getVoteCount(String state, int activityNum) {
+		String activityLevel = "";
+		if (activityNum == 0) {
+			activityLevel = "inactive";
+		}
+		else if (activityNum == 1) {
+			activityLevel = "sedentary";
+		}
+		else if (activityNum == 2) {
+			activityLevel = "active";
+		}
+		else if (activityNum == 2) {
+			activityLevel = "extremelyactive";
+		}
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? AND activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, state, activityLevel);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		}
+		return map;
+	}
+	
+	@Override
+	public Map<Park,Integer> getVoteCount(String state) {
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, state);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		}
+		return map;
+	}
+	
+	@Override
+	public Map<Park,Integer> getVoteCount(int activityNum) {
+		String activityLevel = "";
+		if (activityNum == 0) {
+			activityLevel = "inactive";
+		}
+		else if (activityNum == 1) {
+			activityLevel = "sedentary";
+		}
+		else if (activityNum == 2) {
+			activityLevel = "active";
+		}
+		else if (activityNum == 2) {
+			activityLevel = "extremelyactive";
+		}
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, activityLevel);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		}
+		return map;
+	}
 
 	@Override
 	public void saveSurvey(Survey survey) {
