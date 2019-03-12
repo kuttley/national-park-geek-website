@@ -10,7 +10,7 @@
 	<h4 class="text-center" style="font-family: Montserrat">Let us know which National Park is your favorite!</h4>
 	<div class="d-flex p-3">
 		<form:form action="survey" method="POST" modelAttribute="survey">
-			<div class="form-group row">
+			<div class="form-group row justify-content-between">
 				<label class="lead col-auto col-form-label" for="parkCode" style="font-family: Overpass">Choose a Park</label>
 				<div class="ml-auto col-auto d-flex align-self-center">
 					<form:select cssClass="form-control form-control-sm" path="parkCode" required="required">

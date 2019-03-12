@@ -65,3 +65,7 @@ img#logo {
 #postForm {
 	padding: 20px;
 }
+
+form {
+	width: 100%;
+}
