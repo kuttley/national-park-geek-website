@@ -80,10 +80,35 @@ public class NPGeekController {
 		return "redirect:/favoriteParks";
 	}
 	
-	@RequestMapping("/favoriteParks")
-	public String displayFavoriteParksPage(ModelMap modelMap) {
-		modelMap.addAttribute("surveys", surveyDao.getVoteCount());
+	@RequestMapping(path="/favoriteParks", method=RequestMethod.GET)
+	public String displayFavoriteParksPage(ModelMap modelHolder, ModelMap modelMap, HttpSession session) {
+		if (session.getAttribute("state") == null) {
+			session.setAttribute("state", "");
+		}
+		if (String.valueOf(session.getAttribute("activityNum")).isEmpty()) {
+			session.setAttribute("activityNum", "-1");
+		}
+		if( ! modelHolder.containsAttribute("state")){
+			session.setAttribute("state", "");
+		}
+		if( ! modelHolder.containsAttribute("activityNum")){
+			session.setAttribute("activityNum", -1);
+		}
+		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(session.getAttribute("state")), Integer.parseInt(String.valueOf(session.getAttribute("activityNum")))));
 		return "favoriteParks";
+	}
+	
+	@RequestMapping(path="/favoriteParks", method=RequestMethod.POST)
+	public String handleFavoriteParksPage(@Valid @ModelAttribute String stateChosen, BindingResult result1,
+										@Valid @ModelAttribute String activityNumChosen, BindingResult result2,
+										RedirectAttributes flash, HttpSession session) {
+		session.setAttribute("state", stateChosen);
+		session.setAttribute("activityNum", activityNumChosen);
+		flash.addFlashAttribute("state", stateChosen);
+		flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "state", result1);
+		flash.addFlashAttribute("activityNum", activityNumChosen);
+		flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "activityNum", result2);
+		return "redirect:/favoriteParks";
 	}
 	
 	private void populateParksList(ModelMap modelMap) {

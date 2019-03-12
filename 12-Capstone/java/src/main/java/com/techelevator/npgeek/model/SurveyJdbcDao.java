@@ -19,75 +19,23 @@ public class SurveyJdbcDao implements SurveyDao{
 	}
 	
 	@Override
-	public Map<Park,Integer> getVoteCount() {
-		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
-		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark);
-		while (results.next()) {
-			String parkcode = results.getString("parkcode");
-			map.put(createPark(parkcode), results.getInt("totalvotes"));
-		}
-		return map;
-	}
-	
-	@Override
 	public Map<Park,Integer> getVoteCount(String state, int activityNum) {
-		String activityLevel = "";
-		if (activityNum == 0) {
-			activityLevel = "inactive";
-		}
-		else if (activityNum == 1) {
-			activityLevel = "sedentary";
-		}
-		else if (activityNum == 2) {
-			activityLevel = "active";
-		}
-		else if (activityNum == 2) {
-			activityLevel = "extremelyactive";
-		}
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
-		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? AND activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, state, activityLevel);
-		while (results.next()) {
-			String parkcode = results.getString("parkcode");
-			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		if (!state.isEmpty() && activityNum != -1) {
+			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? AND activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			map = getMap(selectSurveysForPark, state, activityNum);
 		}
-		return map;
-	}
-	
-	@Override
-	public Map<Park,Integer> getVoteCount(String state) {
-		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
-		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, state);
-		while (results.next()) {
-			String parkcode = results.getString("parkcode");
-			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		else if (!state.isEmpty()) {
+			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			map = getMap(selectSurveysForPark, state);
 		}
-		return map;
-	}
-	
-	@Override
-	public Map<Park,Integer> getVoteCount(int activityNum) {
-		String activityLevel = "";
-		if (activityNum == 0) {
-			activityLevel = "inactive";
+		else if (activityNum != -1) {
+			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			map = getMap(selectSurveysForPark, activityNum);
 		}
-		else if (activityNum == 1) {
-			activityLevel = "sedentary";
-		}
-		else if (activityNum == 2) {
-			activityLevel = "active";
-		}
-		else if (activityNum == 2) {
-			activityLevel = "extremelyactive";
-		}
-		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
-		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, activityLevel);
-		while (results.next()) {
-			String parkcode = results.getString("parkcode");
-			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		else {
+			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			map = getMap(selectSurveysForPark);
 		}
 		return map;
 	}
@@ -122,6 +70,65 @@ public class SurveyJdbcDao implements SurveyDao{
 			park.setNumberOfAnimalSpecies(results.getInt("numberofanimalspecies"));
 		}
 		return park;
+	}
+	
+	private String getActivityLevelString(int activityNum) {
+		String activityLevel = "";
+		if (activityNum == 0) {
+			activityLevel = "inactive";
+		}
+		else if (activityNum == 1) {
+			activityLevel = "sedentary";
+		}
+		else if (activityNum == 2) {
+			activityLevel = "active";
+		}
+		else if (activityNum == 2) {
+			activityLevel = "extremelyactive";
+		}
+		return activityLevel;
+	}
+	
+	private Map<Park,Integer> getMap(String selectSurveysForPark) {
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		}
+		return map;
+	}
+	
+	private Map<Park,Integer> getMap(String selectSurveysForPark, String state, int activityNum) {
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		String activityLevel = getActivityLevelString(activityNum);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, state, activityLevel);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		}
+		return map;
+	}
+	
+	private Map<Park,Integer> getMap(String selectSurveysForPark, String state) {
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, state);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		}
+		return map;
+	}
+	
+	private Map<Park,Integer> getMap(String selectSurveysForPark, int activityNum) {
+		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
+		String activityLevel = getActivityLevelString(activityNum);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, activityLevel);
+		while (results.next()) {
+			String parkcode = results.getString("parkcode");
+			map.put(createPark(parkcode), results.getInt("totalvotes"));
+		}
+		return map;
 	}
 
 }
