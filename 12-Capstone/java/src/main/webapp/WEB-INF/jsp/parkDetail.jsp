@@ -95,7 +95,7 @@
 								<c:set var="tempAdvisory" value="Be extremely careful in frigid temperatures!" />
 							</c:when>
 						</c:choose>
-						<p class="card-text">${weatherAdvisory}<br><br>${tempAdvisory}</p>
+						<p class="card-text">${weatherAdvisory}<c:if test="${weatherAdvisory ne ''}"><br><br></c:if>${tempAdvisory}</p>
 					</div>
 				</div>
 			 </c:forEach>
