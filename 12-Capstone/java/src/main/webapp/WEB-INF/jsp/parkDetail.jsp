@@ -41,16 +41,16 @@
 				 </div>
 			 </div>
 			 <hr>
-			 <div class="d-flex justify-content-end">
 			<form method="POST">
+			 <div class="d-flex justify-content-end">
 				<c:if test="${sessionScope.tempScale == 'F'}">
 					<button class="btn btn-outline-primary mb-3" name="tempScaleChange" type="submit" value="C">Change Temps to °C</button>
 				</c:if>
 				<c:if test="${sessionScope.tempScale == 'C'}">
 					<button class="btn btn-outline-primary mb-3" name="tempScaleChange" type="submit" value="F">Change Temps to °F</button>
 				</c:if>
-			</form>
 			</div>
+			</form>
 			 
 			 <div class="card-group justify-content-center pb-3">
 			 <c:forEach var="weatherForecast" items="${weather}">
