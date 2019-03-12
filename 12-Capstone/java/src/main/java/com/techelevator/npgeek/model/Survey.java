@@ -13,7 +13,7 @@ public class Survey {
 	@Size(max=10)
 	private String parkCode;
 	@NotBlank(message="*")
-	@Email
+	@Email(message="* Please enter a valid email.")
 	@Size(max=100)
 	private String email;
 	@NotBlank(message="*")
@@ -23,7 +23,7 @@ public class Survey {
 	@Size(min=6,max=15)
 	private String activityLevel;
 	
-	@AssertTrue
+	@AssertTrue(message="* Invalid email")
 	public boolean isEmailValid() {
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
 				+ "A-Z]{2,7}$";

@@ -11,30 +11,33 @@
 	<form:form id="postForm" action="survey" method="POST" modelAttribute="survey">
 		<div>
 			<label class="surveyLabel" for="parkCode">Choose a Park</label>
-			<form:select class="selectSurvey" path="parkCode">
+			<form:select class="selectSurvey" path="parkCode" required="required">
 				<option value=""></option>
 				<c:forEach var="park" items="${parksList}">
 					<option value="${park.parkCode}">${park.parkName}</option>
 				</c:forEach>
 			</form:select>
+			<form:errors path="parkCode" />
 		</div>
 		<div>
 			<label class="surveyLabel" for="email">Email</label>
-			<form:input class="selectSurvey" type="email" path="email" />
+			<form:input class="selectSurvey" type="email" path="email" pattern="^.+@.+\..{2,7}" required="required" />
+			<form:errors path="email" />
 		</div>
 		<div>
 			<label class="surveyLabel" for="activityLevel">Choose an Activity Level</label>
-			<form:select class="selectSurvey" path="activityLevel">
+			<form:select class="selectSurvey" path="activityLevel" required="required">
 				<option value=""></option>
 				<option value="inactive">Inactive</option>
 				<option value="sedentary">Sedentary</option>
 				<option value="active">Active</option>
 				<option value="extremelyactive">Extremely Active</option>
 			</form:select>
+			<form:errors path="activityLevel" />
 		</div>
 		<div>
 			<label class="surveyLabel" for="state">What is your state of residence?</label>
-			<form:select class="selectSurvey" path="state">
+			<form:select class="selectSurvey" path="state" required="required">
 				<option value=""></option>
 				<option value="AK">Alaska</option>
 				<option value="AL">Alabama</option>
@@ -89,6 +92,7 @@
 				<option value="WV">West Virginia</option>
 				<option value="WY">Wyoming</option>
 			</form:select>
+			<form:errors path="state" />
 		</div>
 		<button class="surveyButton" type="submit">Submit</button>
 	</form:form>
