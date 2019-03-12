@@ -39,7 +39,10 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping("/park")
-	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap, HttpSession session) {
+	public String displayParkDetailPage(@RequestParam String id, @RequestParam(required=false) String tempScaleChange, ModelMap modelMap, HttpSession session) {
+		if (tempScaleChange != null) {
+			session.setAttribute("tempScale", tempScaleChange.substring(tempScaleChange.length() - 1));
+		}
 		if (session.getAttribute("tempScale") == null) {
 			session.setAttribute("tempScale", "F");
 		}

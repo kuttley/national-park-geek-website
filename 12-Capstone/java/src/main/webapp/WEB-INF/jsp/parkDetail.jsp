@@ -41,6 +41,14 @@
 				 </div>
 			 </div>
 			 <hr>
+			<form method="POST">
+				<c:if test="${sessionScope.tempScale == 'F'}">
+					<input name="tempScaleChange" type="submit" value="Change Temps to °C">
+				</c:if>
+				<c:if test="${sessionScope.tempScale == 'C'}">
+					<input name="tempScaleChange" type="submit" value="Change Temps to °F">
+				</c:if>
+			</form>
 			 
 			 <div class="card-group justify-content-center pb-3">
 			 <c:forEach var="weatherForecast" items="${weather}">
