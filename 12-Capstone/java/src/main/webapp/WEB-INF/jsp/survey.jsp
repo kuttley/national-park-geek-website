@@ -5,13 +5,13 @@
 	<c:param name="title">Daily Survey</c:param>
 	<c:param name="surveyActive">active</c:param>
 </c:import>
-<div class="container rounded" id="park-detail">
-	<h2>Take Survey</h2>
-	<form:form id="postForm" action="survey" method="POST"
-		modelAttribute="survey">
+<div class="card mb-3 shadow">
+	<h2 class="surveyHeading">Please take Survey below</h2>
+	<h3 class="surveyHeading">Let us know which National Park is your favorite!</h3>
+	<form:form id="postForm" action="survey" method="POST" modelAttribute="survey">
 		<div>
-			<label for="parkCode">Choose a Park</label>
-			<form:select path="parkCode">
+			<label class="surveyLabel" for="parkCode">Choose a Park</label>
+			<form:select class="selectSurvey" path="parkCode">
 				<option value=""></option>
 				<c:forEach var="park" items="${parksList}">
 					<option value="${park.parkCode}">${park.parkName}</option>
@@ -19,12 +19,12 @@
 			</form:select>
 		</div>
 		<div>
-			<label for="email">Email</label>
-			<form:input type="email" path="email" />
+			<label class="surveyLabel" for="email">Email</label>
+			<form:input class="selectSurvey" type="email" path="email" />
 		</div>
 		<div>
-			<label for="activityLevel">Choose an Activity Level</label>
-			<form:select path="activityLevel">
+			<label class="surveyLabel" for="activityLevel">Choose an Activity Level</label>
+			<form:select class="selectSurvey" path="activityLevel">
 				<option value=""></option>
 				<option value="inactive">Inactive</option>
 				<option value="sedentary">Sedentary</option>
@@ -33,8 +33,8 @@
 			</form:select>
 		</div>
 		<div>
-			<label for="state">What is your state of residence?</label>
-			<form:select path="state">
+			<label class="surveyLabel" for="state">What is your state of residence?</label>
+			<form:select class="selectSurvey" path="state">
 				<option value=""></option>
 				<option value="AK">Alaska</option>
 				<option value="AL">Alabama</option>
@@ -90,7 +90,7 @@
 				<option value="WY">Wyoming</option>
 			</form:select>
 		</div>
-		<button type="submit">Submit</button>
+		<button class="surveyButton" type="submit">Submit</button>
 	</form:form>
 </div>
 
