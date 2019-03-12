@@ -43,6 +43,7 @@ public class WeatherJdbcDao implements WeatherDao{
 			oneDayForecast.setLowTempC(oneDayForecast.getLowTempF());
 			oneDayForecast.setHighTempC(oneDayForecast.getHighTempF());
 			oneDayForecast.setForecast(getCamelCaseForecast(results.getString("forecast").split(" ")));
+			oneDayForecast.setDay();
 		}
 		return oneDayForecast;
 	}

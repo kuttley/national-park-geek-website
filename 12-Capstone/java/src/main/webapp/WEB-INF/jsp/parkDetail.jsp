@@ -56,24 +56,7 @@
 					<c:url var="forecastImg" value="/img/weather/${weatherForecast.forecast}.png" />
 					<img class="card-img-top" src="${forecastImg}" alt="${weatherForecast.forecast} image">
 					<div class="card-body">
-						<c:choose>
-							<c:when test="${weatherForecast.forecastDay == 1}">
-								<c:set var="day" value="Today" />
-							</c:when>
-							<c:when test="${weatherForecast.forecastDay == 2}">
-								<c:set var="day" value="Tomorrow" />
-							</c:when>
-							<c:when test="${weatherForecast.forecastDay == 3}">
-								<c:set var="day" value="2 Days" />
-							</c:when>
-							<c:when test="${weatherForecast.forecastDay == 4}">
-								<c:set var="day" value="3 Days" />
-							</c:when>
-							<c:when test="${weatherForecast.forecastDay == 5}">
-								<c:set var="day" value="4 Days" />
-							</c:when>
-						</c:choose>
-						<h5 class="card-title">${day}</h5>
+						<h5 class="card-title">${weatherForecast.day}</h5>
 						
 						<c:if test="${sessionScope.tempScale == 'F'}">
 							<h5 class="card-text"><fmt:formatNumber value="${weatherForecast.highTempF}" maxFractionDigits="2" /> °F / <span class="h6"><fmt:formatNumber value="${weatherForecast.lowTempF}" maxFractionDigits="2" /> °F</span></h5>

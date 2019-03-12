@@ -77,8 +77,7 @@ public class Weather {
 		return day;
 	}
 	public void setDay() {
-		LocalDate today = LocalDate.now();
-		DayOfWeek dayOfWeek = today.getDayOfWeek();
+		DayOfWeek dayOfWeek = LocalDate.now().getDayOfWeek();
 		if (forecastDay == 1) {
 			day = "Today";
 		}
