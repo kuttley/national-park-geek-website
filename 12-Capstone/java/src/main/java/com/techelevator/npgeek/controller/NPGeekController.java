@@ -81,33 +81,32 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/favoriteParks", method=RequestMethod.GET)
-	public String displayFavoriteParksPage(ModelMap modelHolder, ModelMap modelMap, HttpSession session) {
-		if (session.getAttribute("state") == null) {
-			session.setAttribute("state", "");
+	public String displayFavoriteParksPage(ModelMap modelHolder, ModelMap modelMap) {
+		if (modelHolder.get("state") == null) {
+			modelHolder.put("state", "");
 		}
-		if (String.valueOf(session.getAttribute("activityNum")).isEmpty()) {
-			session.setAttribute("activityNum", "-1");
+		if (modelHolder.get("activityNum") == null || String.valueOf(modelHolder.get("activityNum")).isEmpty()) {
+			modelHolder.put("activityNum", "-1");
 		}
-		if( ! modelHolder.containsAttribute("state")){
-			session.setAttribute("state", "");
-		}
-		if( ! modelHolder.containsAttribute("activityNum")){
-			session.setAttribute("activityNum", -1);
-		}
-		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(session.getAttribute("state")), Integer.parseInt(String.valueOf(session.getAttribute("activityNum")))));
+		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelHolder.get("state")), Integer.parseInt(String.valueOf(modelHolder.get("activityNum")))));
 		return "favoriteParks";
 	}
 	
 	@RequestMapping(path="/favoriteParks", method=RequestMethod.POST)
-	public String handleFavoriteParksPage(@Valid @ModelAttribute String stateChosen, BindingResult result1,
-										@Valid @ModelAttribute String activityNumChosen, BindingResult result2,
-										RedirectAttributes flash, HttpSession session) {
-		session.setAttribute("state", stateChosen);
-		session.setAttribute("activityNum", activityNumChosen);
-		flash.addFlashAttribute("state", stateChosen);
-		flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "state", result1);
-		flash.addFlashAttribute("activityNum", activityNumChosen);
-		flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "activityNum", result2);
+	public String handleFavoriteParksPage(@RequestParam String stateChosen, @RequestParam String activityNumChosen,
+										RedirectAttributes flash) {
+		if (stateChosen == null) {
+			flash.addFlashAttribute("state", "");
+		}
+		else {
+			flash.addFlashAttribute("state", stateChosen);
+		}
+		if (activityNumChosen == null || activityNumChosen.isEmpty()) {
+			flash.addFlashAttribute("activityNum", "-1");
+		}
+		else {
+			flash.addFlashAttribute("activityNum", activityNumChosen);
+		}
 		return "redirect:/favoriteParks";
 	}
 	
