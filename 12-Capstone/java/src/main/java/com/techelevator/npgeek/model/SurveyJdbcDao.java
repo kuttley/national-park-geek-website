@@ -21,7 +21,7 @@ public class SurveyJdbcDao implements SurveyDao{
 	@Override
 	public Map<Park,Integer> getVoteCount() {
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
-		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes DESC";
+		String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes DESC, parkcode DESC";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark);
 		while (results.next()) {
 			String parkcode = results.getString("parkcode");

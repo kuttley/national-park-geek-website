@@ -2,7 +2,6 @@ package com.techelevator.npgeek.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,8 @@ public class NPGeekController {
 	private List<Park> parksList;
 	
 	@RequestMapping("/") 
-	public String displayHomePage(HttpSession session) {
-		populateParksList(session);
+	public String displayHomePage(ModelMap modelMap) {
+		populateParksList(modelMap);
 		return "homepage";
 	}
 	
@@ -50,11 +49,11 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.GET)
-	public String displaySurveyPage(ModelMap modelHolder, ModelMap modelMap, HttpSession session) {
+	public String displaySurveyPage(ModelMap modelHolder, ModelMap modelMap) {
 		if( ! modelHolder.containsAttribute("survey")){
             modelHolder.put("survey", new Survey());
 		}
-		populateParksList(session);
+		populateParksList(modelMap);
 		return "survey";
 	}
 	
@@ -76,12 +75,10 @@ public class NPGeekController {
 		return "favoriteParks";
 	}
 	
-	private void populateParksList(HttpSession session) {
+	private void populateParksList(ModelMap modelMap) {
 		if (parksList == null || parksList.isEmpty()) {
 			parksList = parkDao.getAllParks();
 		}
-		if (session.getAttribute("parksList") == null) {
-			session.setAttribute("parksList", parksList);
-		}
+		modelMap.addAttribute("parksList", parksList);
 	}
 }
