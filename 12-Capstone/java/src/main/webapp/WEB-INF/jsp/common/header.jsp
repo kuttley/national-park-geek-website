@@ -12,7 +12,7 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="css/npgeek.css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat|Overpass:300,400" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Overpass:300,400,700" rel="stylesheet">
 </head>
 <body>
 	<div class="d-flex justify-content-center py-3" id="header">

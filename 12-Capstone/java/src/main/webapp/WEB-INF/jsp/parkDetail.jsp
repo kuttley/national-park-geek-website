@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:import url="/WEB-INF/jsp/common/header.jsp">
 	<c:param name="title"></c:param>
@@ -18,11 +19,28 @@
 				<p class="mb-0">${park.inspirationalQuote}</p>
 				<footer class="blockquote-footer">${park.inspirationalQuoteSource}</footer>
 			</blockquote>
-			<p>${park.description}</p>
+			<hr>
+			
+			<div class="row mb-4 bg-white rounded p-2 shadow">
+				<div class="col-5">
+					<p class="text-dark">${park.description}</p>
+				</div>
 			<!-- TODO: Fix park information to look good. -->
-			<p>${park.acreage} ${park.elevationInFeet} ${park.milesOfTrail} ${park.campsites} ${park.climate} ${park.yearFounded} ${park.annualVisitorCount}
-			 ${park.entryFee} ${park.numberOfAnimalSpecies}</p>
-			 
+				<div class="col-3 align-self-center">
+					<p class="text-muted"><strong class="text-dark">Entry Fee:</strong> <fmt:formatNumber value="${park.entryFee}" type="currency" /></p>
+					<p class="text-muted"><strong class="text-dark">Acreage:</strong> <fmt:formatNumber value="${park.acreage}" /></p>
+					<p class="text-muted"><strong class="text-dark">Elevation:</strong> <fmt:formatNumber value="${park.elevationInFeet}" /> ft</p>
+					<p class="text-muted"><strong class="text-dark">Miles of Trails:</strong> ${park.milesOfTrail}</p>
+					<p class="text-muted"><strong class="text-dark">Campsites:</strong> ${park.campsites}</p>
+				</div>
+				<div class="col-4 align-self-center">
+					<p class="text-muted"><strong class="text-dark">Climate:</strong> ${park.climate}</p>
+					<p class="text-muted"><strong class="text-dark">Year Founded:</strong> ${park.yearFounded}</p>
+					<p class="text-muted"><strong class="text-dark">Annual Visitor Count:</strong> <fmt:formatNumber value="${park.annualVisitorCount}" /></p>
+					<p class="text-muted"><strong class="text-dark">Num. of Animal Species:</strong> ${park.numberOfAnimalSpecies}</p>
+				 </div>
+			 </div>
+			 <hr>
 			 
 			 <div class="card-group justify-content-center pb-3">
 			 <c:forEach var="weatherForecast" items="${weather}">
