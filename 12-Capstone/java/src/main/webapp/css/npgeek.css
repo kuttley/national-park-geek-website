@@ -80,3 +80,8 @@ form {
 	height: 500px;
 	width: 600px;
 }
+
+#gmap_canvas {
+	width: 600px;
+	height: 500px;
+}

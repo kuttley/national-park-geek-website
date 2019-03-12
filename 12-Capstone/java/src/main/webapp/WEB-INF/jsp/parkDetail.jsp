@@ -106,7 +106,7 @@
 	<div class="d-flex justify-content-center">
 		<div class="mapouter">
 			<div class="gmap_canvas">
-				<iframe class="border-0" width="600" height="500" id="gmap_canvas"
+				<iframe class="border-0" id="gmap_canvas"
 					src="https://maps.google.com/maps?q=${park.parkName}&t=&z=9&ie=UTF8&iwloc=&output=embed"></iframe>
 			</div>
 		</div>
