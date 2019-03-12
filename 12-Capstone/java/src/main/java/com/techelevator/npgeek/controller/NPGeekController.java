@@ -85,7 +85,7 @@ public class NPGeekController {
 		if (modelMap.get("state") == null) {
 			modelMap.put("state", "");
 		}
-		if (modelMap.get("activityNum") == null || String.valueOf(modelMap.get("activityNum")).isEmpty()) {
+		if (modelMap.get("activityNum") == null) {
 			modelMap.put("activityNum", "-1");
 		}
 		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelMap.get("state")), Integer.parseInt(String.valueOf(modelMap.get("activityNum")))));
