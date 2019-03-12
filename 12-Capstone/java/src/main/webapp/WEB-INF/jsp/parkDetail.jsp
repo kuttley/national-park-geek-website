@@ -102,8 +102,8 @@
 			 </div>
 		</div>
 	</div>
-
-	<div class="d-flex justify-content-center">
+	<hr>
+	<div class="pt-2 d-flex justify-content-center">
 		<div class="mapouter">
 			<div class="gmap_canvas">
 				<iframe class="border-0" id="gmap_canvas"
