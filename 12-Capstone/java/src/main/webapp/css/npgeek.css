@@ -65,28 +65,3 @@ img#logo {
 #postForm {
 	padding: 20px;
 }
-
-.surveyLabel {
-	width: 40%;
-	padding-left: 10%;
-	padding-right: 20%;
-	padding-bottom: 30px;
-	white-space: nowrap;
-}
-
-.surveyHeading {
-	text-align: center;
-	padding-bottom: 4%;
-}
-
-.selectSurvey {
-	width: 20%;
-	height: 12%;
-}
-
-.surveyButton {
-	float: right;
-	padding: 1%;
-	margin-bottom: 5%;
-	margin-right: 15%;
-}

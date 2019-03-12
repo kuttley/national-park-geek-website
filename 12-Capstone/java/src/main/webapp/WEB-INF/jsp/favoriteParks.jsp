@@ -11,8 +11,8 @@
 	<div class="d-flex justify-content-end">
 		<form method="POST">
 			<div>
-				<label class="surveyLabel" for="activityNumChosen">Choose an Activity Level to Search By</label>
-				<select class="selectSurvey" name="activityNumChosen">
+				<label for="activityNumChosen" style="font-family: Montserrat">Choose an Activity Level to Search By</label>
+				<select name="activityNumChosen">
 					<option value="-1"></option>
 					<option value="0">Inactive</option>
 					<option value="1">Sedentary</option>
@@ -21,8 +21,8 @@
 				</select>
 			</div>
 			<div>
-				<label class="surveyLabel" for="stateChosen">Choose State to Search By</label>
-				<select class="selectSurvey" name="stateChosen">
+				<label for="stateChosen" style="font-family: Montserrat">Choose State to Search By</label>
+				<select name="stateChosen">
 					<option value=""></option>
 					<option value="AK">Alaska</option>
 					<option value="AL">Alabama</option>
@@ -84,7 +84,7 @@
 	<div class="row justify-content-center">
 		<c:forEach var="survey" items="${surveys}">
 			<c:if test="${survey.value > 0}">
-				<div class="col-sm-2 bg-light m-2 py-2 rounded shadow">
+				<div class="col-sm-auto col-lg-2 bg-light m-2 py-2 rounded shadow">
 					<c:url var="parkImg" value="img/parks/${survey.key.parkCode.toLowerCase()}.jpg" />
 					<img class="card-img park-image shadow " src="${parkImg}" alt="${survey.key.parkName} image">
 					<p class="mt-2 h6 text-center">${survey.key.parkName}</p>
@@ -103,3 +103,4 @@
 </div>
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
+
