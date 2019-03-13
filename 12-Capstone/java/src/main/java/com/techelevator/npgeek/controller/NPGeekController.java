@@ -1,6 +1,9 @@
 package com.techelevator.npgeek.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +68,7 @@ public class NPGeekController {
 			modelMap.put("survey", new Survey());
 		}
 		populateParksList(modelMap);
+		modelMap.addAttribute("states", stateAndAbbreviation());
 		return "survey";
 	}
 	
@@ -89,6 +93,7 @@ public class NPGeekController {
 		if (modelMap.get("activityLevel") == null) {
 			modelMap.put("activityLevel", "");
 		}
+		modelMap.addAttribute("states", stateAndAbbreviation());
 		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelMap.get("state")), String.valueOf(modelMap.get("activityLevel"))));
 		return "favoriteParks";
 	}
@@ -108,4 +113,64 @@ public class NPGeekController {
 		}
 		modelMap.addAttribute("parksList", parksList);
 	}
+	
+	public Map<String, String> stateAndAbbreviation() {
+		Map<String, String> stateMap = new LinkedHashMap<>();
+		
+		stateMap.put("AK", "Alaska");
+		stateMap.put("AL", "Alabama");
+		stateMap.put("AR", "Arkansas");
+		stateMap.put("AZ", "Arizona");
+		stateMap.put("CA", "California");
+		stateMap.put("CO", "Colorado");
+		stateMap.put("CT", "Connecticut");
+		stateMap.put("DC", "District of Columbia");
+		stateMap.put("DE", "Delaware");
+		stateMap.put("FL", "Florida");
+		stateMap.put("GA", "Georgia");
+		stateMap.put("HI", "Hawaii");
+		stateMap.put("IA", "Iowa");
+		stateMap.put("ID", "Idaho");
+		stateMap.put("IL", "Illinois");
+		stateMap.put("IN", "Indiana");
+		stateMap.put("KS", "Kansas");
+		stateMap.put("KY", "Kentucky");
+		stateMap.put("LA", "Louisiana");
+		stateMap.put("MA", "Massachusetts");
+		stateMap.put("MD", "Maryland");
+		stateMap.put("ME", "Maine");
+		stateMap.put("MI", "Michigan");
+		stateMap.put("MN", "Minnesota");
+		stateMap.put("MO", "Missouri");
+		stateMap.put("MS", "Mississippi");
+		stateMap.put("MT", "Montana");
+		stateMap.put("NC", "North Carolina");
+		stateMap.put("ND", "North Dakota");
+		stateMap.put("NE", "Nebraska");
+		stateMap.put("NH", "New Hampshire");
+		stateMap.put("NJ", "New Jersey");
+		stateMap.put("NM", "New Mexico");
+		stateMap.put("NV", "Nevada");
+		stateMap.put("NY", "New York");
+		stateMap.put("OH", "Ohio");
+		stateMap.put("OK", "Oklahoma");
+		stateMap.put("OR", "Oregon");
+		stateMap.put("PA", "Pennsylvania");
+		stateMap.put("PR", "Puerto Rico");
+		stateMap.put("RI", "Rhode Island");
+		stateMap.put("SC", "South Carolina");
+		stateMap.put("SD", "South Dakota");
+		stateMap.put("TN", "Tennessee");
+		stateMap.put("TX", "Texas");
+		stateMap.put("UT", "Utah");
+		stateMap.put("VA", "Virginia");
+		stateMap.put("VT", "Vermont");
+		stateMap.put("WA", "Washington");
+		stateMap.put("WI", "Wisconsin");
+		stateMap.put("WV", "West Virginia");
+		stateMap.put("WY", "Wyoming");
+		
+		return stateMap;
+	}
+	
 }
