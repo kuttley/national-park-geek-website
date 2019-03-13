@@ -18,7 +18,7 @@ public class NPGeekTests {
 	private static SingleConnectionDataSource dataSource;
 	
 	/* 
-	 * Initialize the datasource for testing
+	 * Initialize the DataSource
 	 */
 	@Before
 	public void setupDataSource() {
@@ -30,7 +30,7 @@ public class NPGeekTests {
 	}
 	
 	/* 
-	 * Rollback any changes to the database
+	 * Rollback changes to database
 	 * Close the DataSource
 	 */
 	@After
