@@ -3,16 +3,12 @@ package com.techelevator.npgeek.tests;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-
 import javax.sql.DataSource;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import com.techelevator.npgeek.model.*;
 
@@ -108,13 +104,13 @@ public class NPGeekTests {
 		surveyDao.saveSurvey(survey2);
 		surveyDao.saveSurvey(survey3);
 		Map<Park,Integer> map = surveyDao.getVoteCount("", -1);
-		Assert.assertEquals(map.size(),3);
+		Assert.assertEquals(3,map.size());
 		map = surveyDao.getVoteCount("OH", -1);
-		Assert.assertEquals(map.size(),2);
+		Assert.assertEquals(2,map.size());
 		map = surveyDao.getVoteCount("", 2);
-		Assert.assertEquals(map.size(),2);
+		Assert.assertEquals(2,map.size());
 		map = surveyDao.getVoteCount("OH", 2);
-		Assert.assertEquals(map.size(),1);
+		Assert.assertEquals(1,map.size());
 	}
 	
 }

@@ -145,7 +145,7 @@ public class SurveyJdbcDao implements SurveyDao{
 		else if (activityNum == 2) {
 			activityLevel = "active";
 		}
-		else if (activityNum == 2) {
+		else if (activityNum == 3) {
 			activityLevel = "extremelyactive";
 		}
 		return activityLevel;
