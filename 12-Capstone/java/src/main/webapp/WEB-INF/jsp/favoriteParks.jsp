@@ -39,13 +39,13 @@
 	</div>
 	<div>
 		<c:if test="${activityLevel ne '' || state ne ''}">
-			<h5 class="text-center">Searching...</h5>
+			<h5 class="text-center" style="font-family: Overpass;">Searching...</h5>
 		</c:if>
 		<c:if test="${activityLevel ne ''}">
-			<h6 class="text-center">Activity Level: ${activityLevelMap.get(activityLevel)}</h6>
+			<h6 class="text-center" style="font-family: Overpass;">Activity Level: ${activityLevelMap.get(activityLevel)}</h6>
 		</c:if>
 		<c:if test="${state ne ''}">
-			<h6 class="text-center">State Chosen: ${statesMap.get(state)}</h6>
+			<h6 class="text-center" style="font-family: Overpass;">State Chosen: ${statesMap.get(state)}</h6>
 		</c:if>
 	</div>
 	<div class="row justify-content-center">
