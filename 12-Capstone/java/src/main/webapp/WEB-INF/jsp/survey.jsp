@@ -26,7 +26,7 @@
 				<label class="lead col-auto col-form-label" for="email" style="font-family: Overpass">Email</label>
 				<div class="ml-auto col-auto d-flex align-self-center">
 					<form:input cssClass="form-control form-control-sm" type="email" path="email" pattern="^.+@.+\..{2,7}" required="required" />
-					<form:errors path="email" />
+					<form:errors path="emailValid" />
 				</div>
 			</div>
 			<div class="form-group row">

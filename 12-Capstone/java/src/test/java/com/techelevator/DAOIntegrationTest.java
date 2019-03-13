@@ -21,9 +21,9 @@ public abstract class DAOIntegrationTest {
 	@BeforeClass
 	public static void setupDataSource() {
 		dataSource = new SingleConnectionDataSource();
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/historygeek");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/npgeek");
 		dataSource.setUsername("postgres");
-		dataSource.setPassword("postgres1");
+		dataSource.setPassword("");
 		/* The following line disables autocommit for connections 
 		 * returned by this DataSource. This allows us to rollback
 		 * any changes after each test */
