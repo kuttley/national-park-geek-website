@@ -1,15 +1,44 @@
 package com.techelevator.npgeek.tests;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import javax.sql.DataSource;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import com.techelevator.npgeek.model.*;
 
 //Tests for com.techelevator.npgeek.model*
 public class NPGeekTests {
 
+	private static SingleConnectionDataSource dataSource;
+	
+	/* 
+	 * Initialize the datasource for testing
+	 */
+	@Before
+	public void setupDataSource() {
+		dataSource = new SingleConnectionDataSource();
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/npgeek");
+		dataSource.setUsername("postgres");
+		dataSource.setPassword("postgres1");
+		dataSource.setAutoCommit(false);
+	}
+	
+	/* 
+	 * Rollback any changes to the database
+	 * Close the DataSource
+	 */
+	@After
+	public void closeDataSource() throws SQLException {
+		dataSource.getConnection().rollback();
+		dataSource.destroy();
+	}
+	
 	@Autowired
 	private ParkDao parkDao;
 	@Autowired
