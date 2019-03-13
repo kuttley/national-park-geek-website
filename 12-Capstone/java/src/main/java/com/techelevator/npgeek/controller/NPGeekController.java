@@ -127,7 +127,7 @@ public class NPGeekController {
 		modelMap.addAttribute("activityLevelMap", activityMap);
 	}
 	
-	public Map<String, String> activityLevelMap() {
+	private Map<String, String> activityLevelMap() {
 		Map<String, String> activityMap = new LinkedHashMap<>();
 		activityMap.put("inactive", "Inactive");
 		activityMap.put("sedentary", "Sedentary");
@@ -137,7 +137,7 @@ public class NPGeekController {
 		return activityMap;
 	}
 	
-	public Map<String, String> stateAndAbbreviation() {
+	private Map<String, String> stateAndAbbreviation() {
 		Map<String, String> stateMap = new LinkedHashMap<>();
 		
 		stateMap.put("AK", "Alaska");
