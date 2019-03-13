@@ -34,10 +34,9 @@
 				<div class="ml-auto col-auto d-flex align-self-center">
 					<form:select cssClass="form-control form-control-sm" path="activityLevel" required="required">
 						<option value=""></option>
-						<option value="inactive">Inactive</option>
-						<option value="sedentary">Sedentary</option>
-						<option value="active">Active</option>
-						<option value="extremelyactive">Extremely Active</option>
+						<c:forEach var="activityLevel" items="${activityLevelMap}">
+							<option value="${activityLevel.key}">${activityLevel.value}</option>
+						</c:forEach>
 					</form:select>
 					<form:errors path="activityLevel" />
 				</div>
@@ -47,7 +46,7 @@
 				<div class="ml-auto col-auto d-flex align-self-center ">
 					<form:select cssClass="form-control form-control-sm" path="state" required="required">
 						<option value=""></option>
-						<c:forEach var="state" items="${states}">
+						<c:forEach var="state" items="${statesMap}">
 							<option value="${state.key}">${state.value}</option>
 						</c:forEach>
 					</form:select>

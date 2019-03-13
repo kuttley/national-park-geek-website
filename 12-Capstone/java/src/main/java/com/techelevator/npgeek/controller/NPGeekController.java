@@ -32,6 +32,8 @@ public class NPGeekController {
 	private SurveyDao surveyDao;
 	
 	private List<Park> parksList;
+	private Map<String, String> activityMap;
+	private Map<String, String> stateMap;
 	
 	@RequestMapping("/") 
 	public String displayHomePage(ModelMap modelMap) {
@@ -68,7 +70,7 @@ public class NPGeekController {
 			modelMap.put("survey", new Survey());
 		}
 		populateParksList(modelMap);
-		modelMap.addAttribute("states", stateAndAbbreviation());
+		populateMaps(modelMap);
 		return "survey";
 	}
 	
@@ -93,7 +95,7 @@ public class NPGeekController {
 		if (modelMap.get("activityLevel") == null) {
 			modelMap.put("activityLevel", "");
 		}
-		modelMap.addAttribute("states", stateAndAbbreviation());
+		populateMaps(modelMap);
 		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelMap.get("state")), String.valueOf(modelMap.get("activityLevel"))));
 		return "favoriteParks";
 	}
@@ -112,6 +114,27 @@ public class NPGeekController {
 			parksList = parkDao.getAllParks();
 		}
 		modelMap.addAttribute("parksList", parksList);
+	}
+	
+	private void populateMaps(ModelMap modelMap) {
+		if (stateMap == null || stateMap.isEmpty()) {
+			stateMap = stateAndAbbreviation();
+		}
+		if (activityMap == null || activityMap.isEmpty()) {
+			activityMap = activityLevelMap();
+		}
+		modelMap.addAttribute("statesMap", stateMap);
+		modelMap.addAttribute("activityLevelMap", activityMap);
+	}
+	
+	public Map<String, String> activityLevelMap() {
+		Map<String, String> activityMap = new LinkedHashMap<>();
+		activityMap.put("inactive", "Inactive");
+		activityMap.put("sedentary", "Sedentary");
+		activityMap.put("active", "Active");
+		activityMap.put("extremelyactive", "Extremely Active");
+		
+		return activityMap;
 	}
 	
 	public Map<String, String> stateAndAbbreviation() {

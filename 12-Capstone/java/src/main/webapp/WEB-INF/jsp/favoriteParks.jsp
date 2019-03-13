@@ -15,10 +15,9 @@
 				<div class="col-sm-4">
 					<select class="ml-2 form-control" name="activityLevelChosen">
 						<option value=""></option>
-						<option value="inactive">Inactive</option>
-						<option value="sedentary">Sedentary</option>
-						<option value="active">Active</option>
-						<option value="extremelyactive">Extremely Active</option>
+						<c:forEach var="activityLevel" items="${activityLevelMap}">
+							<option value="${activityLevel.key}">${activityLevel.value}</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
@@ -27,7 +26,7 @@
 				<div class="col-sm-4">
 					<select class="ml-2 form-control" name="stateChosen">
 						<option value=""></option>
-						<c:forEach var="state" items="${states}">
+						<c:forEach var="state" items="${statesMap}">
 							<option value="${state.key}">${state.value}</option>
 						</c:forEach>
 					</select>
@@ -39,11 +38,14 @@
 		</form>
 	</div>
 	<div>
+		<c:if test="${activityLevel ne '' || state ne ''}">
+			<h5 class="text-center">Searching...</h5>
+		</c:if>
 		<c:if test="${activityLevel ne ''}">
-			<h5>Activity Level: ${activityLevel}</h5>
+			<h6 class="text-center">Activity Level: ${activityLevelMap.get(activityLevel)}</h6>
 		</c:if>
 		<c:if test="${state ne ''}">
-			<h5>State Chosen: ${state}</h5>
+			<h6 class="text-center">State Chosen: ${statesMap.get(state)}</h6>
 		</c:if>
 	</div>
 	<div class="row justify-content-center">
