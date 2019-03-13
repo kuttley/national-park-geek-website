@@ -12,7 +12,7 @@
 		<form:form action="survey" method="POST" modelAttribute="survey">
 			<div class="form-group row justify-content-between">
 				<label class="lead col-auto col-form-label" for="parkCode" style="font-family: Overpass">Choose a Park</label>
-				<div class="ml-auto col-auto d-flex align-self-center">
+				<div class="ml-md-auto col-md-auto d-flex align-self-center">
 					<form:select cssClass="form-control form-control-sm" path="parkCode" required="required">
 						<option value=""></option>
 						<c:forEach var="park" items="${parksList}">
@@ -24,14 +24,14 @@
 			</div>
 			<div class="form-group row">
 				<label class="lead col-auto col-form-label" for="email" style="font-family: Overpass">Email</label>
-				<div class="ml-auto col-auto d-flex align-self-center">
+				<div class="ml-md-auto col-md-auto d-flex align-self-center">
 					<form:input cssClass="form-control form-control-sm" type="email" path="email" pattern="^.+@.+\..{2,7}" required="required" />
 					<form:errors path="emailValid" />
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="lead col-auto col-form-label" for="activityLevel" style="font-family: Overpass">Choose an Activity Level</label>
-				<div class="ml-auto col-auto d-flex align-self-center">
+				<div class="ml-md-auto col-md-auto d-flex align-self-center">
 					<form:select cssClass="form-control form-control-sm" path="activityLevel" required="required">
 						<option value=""></option>
 						<c:forEach var="activityLevel" items="${activityLevelMap}">
@@ -42,8 +42,8 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="lead col-auto col-form-label" for="state" style="font-family: Overpass;">What is your state of residence?</label>
-				<div class="ml-auto col-auto d-flex align-self-center ">
+				<label class="lead col-md-auto col-form-label" for="state" style="font-family: Overpass;">What is your state of residence?</label>
+				<div class="ml-md-auto col-md-auto d-flex align-self-center ">
 					<form:select cssClass="form-control form-control-sm" path="state" required="required">
 						<option value=""></option>
 						<c:forEach var="state" items="${statesMap}">
