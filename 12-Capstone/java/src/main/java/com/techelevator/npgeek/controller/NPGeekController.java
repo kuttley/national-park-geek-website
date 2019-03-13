@@ -86,19 +86,19 @@ public class NPGeekController {
 		if (modelMap.get("state") == null) {
 			modelMap.put("state", "");
 		}
-		if (modelMap.get("activityNum") == null) {
-			modelMap.put("activityNum", "-1");
+		if (modelMap.get("activityLevel") == null) {
+			modelMap.put("activityLevel", "");
 		}
-		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelMap.get("state")), Integer.parseInt(String.valueOf(modelMap.get("activityNum")))));
+		modelMap.addAttribute("surveys", surveyDao.getVoteCount(String.valueOf(modelMap.get("state")), String.valueOf(modelMap.get("activityLevel"))));
 		return "favoriteParks";
 	}
 	
 	@RequestMapping(path="/favoriteParks", method=RequestMethod.POST)
-	public String handleFavoriteParksPage(@RequestParam String stateChosen, @RequestParam String activityNumChosen,
+	public String handleFavoriteParksPage(@RequestParam String stateChosen, @RequestParam String activityLevelChosen,
 										RedirectAttributes flash) {
 		//set values for state and activity level to search by
 		flash.addFlashAttribute("state", stateChosen);
-		flash.addFlashAttribute("activityNum", activityNumChosen);
+		flash.addFlashAttribute("activityLevel", activityLevelChosen);
 		return "redirect:/favoriteParks";
 	}
 	

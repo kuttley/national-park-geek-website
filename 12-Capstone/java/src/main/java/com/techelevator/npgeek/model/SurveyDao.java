@@ -39,7 +39,7 @@ public interface SurveyDao {
 	 * for all parks that have recieved one vote and match the search criteria
 	 * <p>
 	 */
-	Map<Park,Integer> getVoteCount(String state, int activityNum);
+	Map<Park,Integer> getVoteCount(String state, String activityLevel);
 	/**
 	 * void saveSurvey(Survey survey);
 	 * <p>

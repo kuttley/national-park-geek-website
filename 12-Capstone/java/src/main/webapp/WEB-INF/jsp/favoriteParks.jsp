@@ -11,14 +11,14 @@
 	<div>
 		<form method="POST">
 			<div class="d-flex justify-content-end mb-2 form-group row">
-				<label class="col-sm-8 col-form-label text-right" for="activityNumChosen" style="font-family: Montserrat">Choose an Activity Level to Search By</label>
+				<label class="col-sm-8 col-form-label text-right" for="activityLevelChosen" style="font-family: Montserrat">Choose an Activity Level to Search By</label>
 				<div class="col-sm-4">
-					<select class="ml-2 form-control" name="activityNumChosen">
-						<option value="-1"></option>
-						<option value="0">Inactive</option>
-						<option value="1">Sedentary</option>
-						<option value="2">Active</option>
-						<option value="3">Extremely Active</option>
+					<select class="ml-2 form-control" name="activityLevelChosen">
+						<option value=""></option>
+						<option value="inactive">Inactive</option>
+						<option value="sedentary">Sedentary</option>
+						<option value="active">Active</option>
+						<option value="extremelyactive">Extremely Active</option>
 					</select>
 				</div>
 			</div>

@@ -103,13 +103,13 @@ public class NPGeekTests {
 		surveyDao.saveSurvey(survey1);
 		surveyDao.saveSurvey(survey2);
 		surveyDao.saveSurvey(survey3);
-		Map<Park,Integer> map = surveyDao.getVoteCount("", -1);
+		Map<Park,Integer> map = surveyDao.getVoteCount("", "");
 		Assert.assertEquals(3,map.size());
-		map = surveyDao.getVoteCount("OH", -1);
+		map = surveyDao.getVoteCount("OH", "");
 		Assert.assertEquals(2,map.size());
-		map = surveyDao.getVoteCount("", 2);
+		map = surveyDao.getVoteCount("", "active");
 		Assert.assertEquals(2,map.size());
-		map = surveyDao.getVoteCount("OH", 2);
+		map = surveyDao.getVoteCount("OH", "active");
 		Assert.assertEquals(1,map.size());
 	}
 	
