@@ -64,6 +64,19 @@ public class NPGeekTests {
 	}
 	
 	@Test
+	public void npgeek_SurveyJdbcDao_Basic_Tests() {
+		Survey survey = new Survey();
+		survey.setParkCode("GCNP");
+		survey.setEmail("testemail@tester.com");
+		survey.setState("OH");
+		survey.setActivityLevel("2");
+		Assert.assertEquals(survey.getParkCode(),"GCNP");
+		Assert.assertEquals(survey.getEmail(),"testemail@tester.com");
+		Assert.assertEquals(survey.getState(),"OH");
+		Assert.assertEquals(survey.getActivityLevel(),"2");
+	}
+	
+	@Test
 	public void npgeek_SurveyJdbcDao_Tests() {
 		Survey survey1 = new Survey();
 		survey1.setParkCode("GCNP");
