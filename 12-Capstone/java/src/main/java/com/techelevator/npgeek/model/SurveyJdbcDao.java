@@ -8,6 +8,32 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+/**
+ * <p>
+ * Survey Jdbc Dao Class
+ * <p>
+ * <p>
+ * Implements SurveyDao and implements two methods from SurveyDao
+ * <p>
+ * <p>
+ * public Map<Park,Integer> getVoteCount(String state, int activityNum)
+ * <p>
+ * <p>
+ * returns a map with all of the keys being all of the Park Objects stored in the park tabe in the database
+ * with the map value being the number of votes that park has recievied from the survey results
+ * for all parks that have recieved one vote and match the search criteria
+ * <p>
+ * <p>
+ * public void saveSurvey(Survey survey)
+ * <p>
+ * <p>
+ * saves the Survey Oobject in the survey_result table in the database
+ * <p>
+ * <p>
+ * This class was made to interact with com.techelevator.npgeek package utilizing the npgeek sequel database and
+ * in use with SurveyDao as well as the NPGeekController
+ * <p>
+ */
 @Component
 public class SurveyJdbcDao implements SurveyDao{
 
@@ -18,8 +44,19 @@ public class SurveyJdbcDao implements SurveyDao{
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
+	/**
+	 * <p>
+	 * public Map<Park,Integer> getVoteCount(String state, int activityNum)
+	 * <p>
+	 * <p>
+	 * returns a map with all of the keys being all of the Park Objects stored in the park tabe in the database
+	 * with the map value being the number of votes that park has recievied from the survey results
+	 * for all parks that have recieved one vote and match the search criteria
+	 * <p>
+	 */
 	@Override
 	public Map<Park,Integer> getVoteCount(String state, int activityNum) {
+		//Create map and populate map by calling on getMap()
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
 		if (!state.isEmpty() && activityNum != -1) {
 			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? AND activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
@@ -40,14 +77,31 @@ public class SurveyJdbcDao implements SurveyDao{
 		return map;
 	}
 
+	/**
+	 * <p>
+	 public void saveSurvey(Survey survey)
+	 * <p>
+	 * <p>
+	 * saves the Survey Oobject in the survey_result table in the database
+	 * <p>
+	 */
 	@Override
 	public void saveSurvey(Survey survey) {
+		//Insert Survey Object into survey_result table in database in order to save Survey
 		String insertSurveyResults = "INSERT INTO survey_result (parkcode, emailaddress, state, activitylevel) "
 								   + "Values (?,?,?,?)";
 		jdbcTemplate.update(insertSurveyResults, survey.getParkCode(), survey.getEmail(),
 																	survey.getState(), survey.getActivityLevel());
 	}
 	
+	/**
+	 * <p>
+	 * private Park createPark(String parkcode)
+	 * <p>
+	 * <p>
+	 * returns a Park Object for the park with the given park code from the park table in the database
+	 * <p>
+	 */
 	private Park createPark(String parkcode) {
 		String selectPark = "SELECT * FROM park WHERE parkcode = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectPark, parkcode);
@@ -72,6 +126,14 @@ public class SurveyJdbcDao implements SurveyDao{
 		return park;
 	}
 	
+	/**
+	 * <p>
+	 * private String getActivityLevelString(int activityNum)
+	 * <p>
+	 * <p>
+	 * returns a String that corresponds to the selected Activity Level
+	 * <p>
+	 */
 	private String getActivityLevelString(int activityNum) {
 		String activityLevel = "";
 		if (activityNum == 0) {
@@ -89,6 +151,16 @@ public class SurveyJdbcDao implements SurveyDao{
 		return activityLevel;
 	}
 	
+	/**
+	 * <p>
+	 * private Map<Park,Integer> getMap(String selectSurveysForPark)
+	 * <p>
+	 * <p>
+	 * returns a map with all of the keys being all of the Park Objects stored in the park tabe in the database
+	 * with the map value being the number of votes that park has recievied from the survey results
+	 * for all parks that have recieved one vote
+	 * <p>
+	 */
 	private Map<Park,Integer> getMap(String selectSurveysForPark) {
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark);
@@ -99,6 +171,16 @@ public class SurveyJdbcDao implements SurveyDao{
 		return map;
 	}
 	
+	/**
+	 * <p>
+	 * private Map<Park,Integer> getMap(String selectSurveysForPark, String state, int activityNum)
+	 * <p>
+	 * <p>
+	 * returns a map with all of the keys being all of the Park Objects stored in the park tabe in the database
+	 * with the map value being the number of votes that park has recievied from the survey results
+	 * for all parks that have recieved one vote and match the search criteria
+	 * <p>
+	 */
 	private Map<Park,Integer> getMap(String selectSurveysForPark, String state, int activityNum) {
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
 		String activityLevel = getActivityLevelString(activityNum);
@@ -110,6 +192,16 @@ public class SurveyJdbcDao implements SurveyDao{
 		return map;
 	}
 	
+	/**
+	 * <p>
+	 * private Map<Park,Integer> getMap(String selectSurveysForPark, String state)
+	 * <p>
+	 * <p>
+	 * returns a map with all of the keys being all of the Park Objects stored in the park tabe in the database
+	 * with the map value being the number of votes that park has recievied from the survey results
+	 * for all parks that have recieved one vote and match the search criteria
+	 * <p>
+	 */
 	private Map<Park,Integer> getMap(String selectSurveysForPark, String state) {
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
 		SqlRowSet results = jdbcTemplate.queryForRowSet(selectSurveysForPark, state);
@@ -120,6 +212,16 @@ public class SurveyJdbcDao implements SurveyDao{
 		return map;
 	}
 	
+	/**
+	 * <p>
+	 * private Map<Park,Integer> getMap(String selectSurveysForPark, int activityNum)
+	 * <p>
+	 * <p>
+	 * returns a map with all of the keys being all of the Park Objects stored in the park tabe in the database
+	 * with the map value being the number of votes that park has recievied from the survey results
+	 * for all parks that have recieved one vote and match the search criteria
+	 * <p>
+	 */
 	private Map<Park,Integer> getMap(String selectSurveysForPark, int activityNum) {
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
 		String activityLevel = getActivityLevelString(activityNum);

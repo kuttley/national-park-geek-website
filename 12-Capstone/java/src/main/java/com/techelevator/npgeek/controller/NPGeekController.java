@@ -1,7 +1,6 @@
 package com.techelevator.npgeek.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.techelevator.npgeek.model.Park;
 import com.techelevator.npgeek.model.ParkDao;
 import com.techelevator.npgeek.model.Survey;
@@ -40,6 +38,7 @@ public class NPGeekController {
 	
 	@RequestMapping(path="/park", method=RequestMethod.GET)
 	public String displayParkDetailPage(@RequestParam String id, ModelMap modelMap, HttpSession session) {
+		//initialize tempScale
 		if (session.getAttribute("tempScale") == null) {
 			session.setAttribute("tempScale", "F");
 		}
@@ -50,6 +49,7 @@ public class NPGeekController {
 	
 	@RequestMapping(path="/park", method=RequestMethod.POST)
 	public String handleParkDetailPage(@RequestParam String id, @RequestParam(required=false) String tempScaleChange, ModelMap modelMap, HttpSession session) {
+		//if button is pushed change tempScale
 		if (tempScaleChange != null) {
 			session.setAttribute("tempScale", tempScaleChange.substring(tempScaleChange.length() - 1));
 		}
@@ -82,6 +82,7 @@ public class NPGeekController {
 	
 	@RequestMapping(path="/favoriteParks", method=RequestMethod.GET)
 	public String displayFavoriteParksPage(ModelMap modelMap) {
+		//initialize state and activity level to default values
 		if (modelMap.get("state") == null) {
 			modelMap.put("state", "");
 		}
@@ -95,6 +96,7 @@ public class NPGeekController {
 	@RequestMapping(path="/favoriteParks", method=RequestMethod.POST)
 	public String handleFavoriteParksPage(@RequestParam String stateChosen, @RequestParam String activityNumChosen,
 										RedirectAttributes flash) {
+		//set values for state and activity level to search by
 		flash.addFlashAttribute("state", stateChosen);
 		flash.addFlashAttribute("activityNum", activityNumChosen);
 		return "redirect:/favoriteParks";
