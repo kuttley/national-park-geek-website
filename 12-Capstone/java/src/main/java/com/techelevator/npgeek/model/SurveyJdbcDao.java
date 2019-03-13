@@ -59,19 +59,19 @@ public class SurveyJdbcDao implements SurveyDao{
 		//Create map and populate map by calling on getMap()
 		Map<Park,Integer> map = new LinkedHashMap<Park,Integer>();
 		if (!state.isEmpty() && !activityLevel.isEmpty()) {
-			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? AND activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			String selectSurveysForPark = "SELECT survey_result.parkcode, COUNT(*) AS totalvotes FROM survey_result JOIN park on survey_result.parkcode = park.parkcode WHERE survey_result.state = ? AND activitylevel = ?  GROUP BY survey_result.parkcode, park.parkname ORDER BY totalvotes DESC, park.parkname";
 			map = getMap(selectSurveysForPark, state, activityLevel);
 		}
 		else if (!state.isEmpty()) {
-			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE state = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			String selectSurveysForPark = "SELECT survey_result.parkcode, COUNT(*) AS totalvotes FROM survey_result JOIN park on survey_result.parkcode = park.parkcode WHERE survey_result.state = ? GROUP BY survey_result.parkcode, park.parkname ORDER BY totalvotes DESC, park.parkname";
 			map = getMap(selectSurveysForPark, state);
 		}
 		else if (!activityLevel.isEmpty()) {
-			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result WHERE activitylevel = ? GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			String selectSurveysForPark = "SELECT survey_result.parkcode, COUNT(*) AS totalvotes FROM survey_result JOIN park on survey_result.parkcode = park.parkcode WHERE activitylevel = ? GROUP BY survey_result.parkcode, park.parkname ORDER BY totalvotes DESC, park.parkname";
 			map = getMap(selectSurveysForPark, activityLevel);
 		}
 		else {
-			String selectSurveysForPark = "SELECT parkcode, COUNT(*) AS totalvotes FROM survey_result GROUP BY parkcode ORDER BY totalvotes DESC, parkcode";
+			String selectSurveysForPark = "SELECT survey_result.parkcode, COUNT(*) AS totalvotes FROM survey_result JOIN park on survey_result.parkcode = park.parkcode GROUP BY survey_result.parkcode, park.parkname ORDER BY totalvotes DESC, park.parkname";
 			map = getMap(selectSurveysForPark);
 		}
 		return map;
