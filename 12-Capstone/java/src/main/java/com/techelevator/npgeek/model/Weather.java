@@ -237,4 +237,31 @@ public class Weather {
 			day = day.substring(0,1) + day.substring(1).toLowerCase();
 		}
 	}
+	
+	public String getWeatherAdvisory() {
+		String weatherAdvisory = "";
+		if (this.getForecast().equals("sunny")) {
+			weatherAdvisory = "Remember your sunblock!";
+		} else if (this.getForecast().equals("thunderstorms")) {
+			weatherAdvisory = "Seek shelter and avoid hiking on exposed ridges!";
+		} else if (this.getForecast().equals("rain")) {
+			weatherAdvisory = "Pack rain gear and waterproof shoes!";
+		} else if (this.getForecast().equals("snow")) {
+			weatherAdvisory = "Pack snowshoes!";
+		}
+		return weatherAdvisory;
+	}
+	
+	public String getTempAdvisory() {	
+		String tempAdvisory = "";
+		if (this.getHighTempF() > 75.0) {
+			tempAdvisory = "It'll be hot! Bring an extra gallon of water";
+		} else if ( (this.getHighTempF() - this.getLowTempF()) > 20.0) {
+			tempAdvisory = "Wear breathable layers, large temperature change through the day.";
+		} else if (this.getHighTempF() < 20) {
+			tempAdvisory = "Be extremely careful in frigid temperatures!";
+		}
+		
+		return tempAdvisory;
+	}
 }

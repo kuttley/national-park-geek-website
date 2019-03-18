@@ -67,35 +67,7 @@
 							<h5 class="card-text"><fmt:formatNumber value="${weatherForecast.highTempC}" maxFractionDigits="2" /> °C / <span class="h6"><fmt:formatNumber value="${weatherForecast.lowTempC}" maxFractionDigits="2" /> °C</span></h5>
 						</c:if>
 						
-						
-						<c:set var="weatherAdvisory" value="" />
-						<c:set var="tempAdvisory" value="" />
-						<c:choose>
-							<c:when test="${weatherForecast.forecast == 'sunny'}">
-								<c:set var="weatherAdvisory" value="Remember your sunblock! " />
-							</c:when>
-							<c:when test="${weatherForecast.forecast == 'thunderstorms'}">
-								<c:set var="weatherAdvisory" value="Seek shelter and avoid hiking on exposed ridges! " />
-							</c:when>
-							<c:when test="${weatherForecast.forecast == 'rain'}">
-								<c:set var="weatherAdvisory" value="Pack rain gear and waterproof shoes! " />
-							</c:when>
-							<c:when test="${weatherForecast.forecast == 'snow'}">
-								<c:set var="weatherAdvisory" value="Pack snowshoes! " />
-							</c:when>
-						</c:choose>
-						<c:choose>
-							<c:when test="${weatherForecast.highTempF > 75}">
-								<c:set var="tempAdvisory" value="It'll be hot! Bring an extra gallon of water" />
-							</c:when>
-							<c:when test="${weatherForecast.highTempF - weatherForecast.lowTempF > 20}">
-								<c:set var="tempAdvisory" value="Wear breathable layers, large temperature change through the day." />
-							</c:when>
-							<c:when test="${weatherForecast.highTempF < 20}">
-								<c:set var="tempAdvisory" value="Be extremely careful in frigid temperatures!" />
-							</c:when>
-						</c:choose>
-						<p class="card-text">${weatherAdvisory}<c:if test="${weatherAdvisory ne ''}"><br><br></c:if>${tempAdvisory}</p>
+						<p class="card-text">${weatherForecast.weatherAdvisory}<c:if test="${weatherForecast.weatherAdvisory ne ''}"><br><br></c:if>${weatherForecast.tempAdvisory}</p>
 					</div>
 				</div>
 			 </c:forEach>

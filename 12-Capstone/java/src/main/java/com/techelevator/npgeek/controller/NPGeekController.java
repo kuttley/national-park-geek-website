@@ -56,7 +56,7 @@ public class NPGeekController {
 	public String handleParkDetailPage(@RequestParam String id, @RequestParam(required=false) String tempScaleChange, ModelMap modelMap, HttpSession session) {
 		//if button is pushed change tempScale
 		if (tempScaleChange != null) {
-			session.setAttribute("tempScale", tempScaleChange.substring(tempScaleChange.length() - 1));
+			session.setAttribute("tempScale", tempScaleChange);
 		}
 		if (session.getAttribute("tempScale") == null) {
 			session.setAttribute("tempScale", "F");
