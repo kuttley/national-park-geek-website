@@ -74,9 +74,9 @@
 	<hr>
 	<div class="pt-2 d-flex justify-content-center">
 		<div class="mapouter">
-			<div class="gmap_canvas">
-				<iframe class="border-0" id="gmap_canvas"
-					src="https://maps.google.com/maps?q=${park.parkName}&t=&z=9&ie=UTF8&iwloc=&output=embed"></iframe>
+			<div class="map-responsive">
+				<iframe src="https://maps.google.com/maps?q=${park.parkName}&t=&z=9&ie=UTF8&iwloc=&output=embed"
+				width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 			</div>
 		</div>
 	</div>
