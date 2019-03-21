@@ -82,7 +82,15 @@ public class NPGeekController {
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "survey", result);
 			return "redirect:/survey";
         }
-		surveyDao.saveSurvey(survey);
+		if (parkDao.getInfoForPark(survey.getParkCode()) != null &&
+				stateMap.containsKey(survey.getState()) &&
+				activityMap.containsKey(survey.getActivityLevel())) {
+			surveyDao.saveSurvey(survey);
+		}
+		else {
+			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "survey", result);
+			return "redirect:/survey";
+		}
 		return "redirect:/favoriteParks";
 	}
 	
