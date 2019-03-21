@@ -78,19 +78,12 @@ public class NPGeekController {
 	public String handleSurveyPost(@Valid @ModelAttribute Survey survey, BindingResult result,
 									RedirectAttributes flash) {
         flash.addFlashAttribute("survey", survey);
-		if(result.hasErrors()) {
+		if(result.hasErrors() || parkDao.getInfoForPark(survey.getParkCode()) == null ||
+				!stateMap.containsKey(survey.getState()) || !activityMap.containsKey(survey.getActivityLevel())) {
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "survey", result);
 			return "redirect:/survey";
         }
-		if (parkDao.getInfoForPark(survey.getParkCode()) != null &&
-				stateMap.containsKey(survey.getState()) &&
-				activityMap.containsKey(survey.getActivityLevel())) {
-			surveyDao.saveSurvey(survey);
-		}
-		else {
-			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "survey", result);
-			return "redirect:/survey";
-		}
+		surveyDao.saveSurvey(survey);
 		return "redirect:/favoriteParks";
 	}
 	
