@@ -55,15 +55,8 @@
 					<c:url var="parkImg" value="img/parks/${survey.key.parkCode.toLowerCase()}.jpg" />
 					<img class="card-img park-image shadow " src="${parkImg}" alt="${survey.key.parkName} image">
 					<p class="mt-2 h6 text-center">${survey.key.parkName}</p>
-					<c:if test="${survey.value > 1}">
-						<p class="text-center">${survey.value} people voted for this park!</p>
-					</c:if>
-					<c:if test="${survey.value < 2}">
-						<p class="text-center">${survey.value} person voted for this park!</p>
-					</c:if>
+					<p class="text-center">${survey.value}${survey.value == 1 ? ' person' : ' people'} voted for this park!</p>
 				</div>
-				
-				
 			</c:if>
 		</c:forEach>
 	</div>
