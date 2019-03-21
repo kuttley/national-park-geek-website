@@ -41,7 +41,7 @@
 				 </div>
 			 </div>
 			 <hr>
-			<form method="POST">
+			<form method="POST" id="weather">
 			 <div class="d-flex justify-content-end">
 			 	<button class="btn btn-outline-primary mb-3" name="tempScaleChange" type="submit"
 			 	value="${sessionScope.tempScale == 'F' ? 'C' : 'F'}">
@@ -63,7 +63,6 @@
 						<c:if test="${sessionScope.tempScale == 'C'}">
 							<h5 class="card-text"><fmt:formatNumber value="${weatherForecast.highTempC}" maxFractionDigits="2" /> °C / <span class="h6"><fmt:formatNumber value="${weatherForecast.lowTempC}" maxFractionDigits="2" /> °C</span></h5>
 						</c:if>
-						
 						<p class="card-text">${weatherForecast.weatherAdvisory}<c:if test="${weatherForecast.weatherAdvisory ne ''}"><br><br></c:if>${weatherForecast.tempAdvisory}</p>
 					</div>
 				</div>

@@ -61,7 +61,7 @@ public class NPGeekController {
 		if (session.getAttribute("tempScale") == null) {
 			session.setAttribute("tempScale", "F");
 		}
-		return "redirect:/park?id="+id;
+		return "redirect:/park?id="+id+"#weather";
 	}
 	
 	@RequestMapping(path="/survey", method=RequestMethod.GET)
