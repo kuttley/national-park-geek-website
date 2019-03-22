@@ -79,7 +79,8 @@ form {
     overflow:hidden;
     padding-bottom:56.25%;
     position:relative;
-    height:0;
+    height:100%;
+    width:100%;
 }
 .map-responsive iframe{
     left:0;
